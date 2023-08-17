@@ -1,10 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { HomePage } from '../wallet/pages/HomePage'
-import { BenefitsPage } from '../wallet/pages/BenefitsPage'
-import { DemoPage } from '../wallet/pages/DemoPage'
-import {Navbar} from '../ui/Navbar'
-import { RegisterPage } from '../wallet/pages/RegisterPage'
-import { LoginPage } from '../wallet/pages/LoginPage'
+import { BenefitsPage, DemoPage, HomePage, LoginPage, RegisterPage } from '../pages'
+import {Navbar} from '../../ui'
  
 export const AppRouter = () => {
   return (

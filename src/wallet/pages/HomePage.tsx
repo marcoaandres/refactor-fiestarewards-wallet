@@ -1,13 +1,9 @@
 import { Link as ReactLink } from 'react-router-dom'
 import { Button, Flex } from '@chakra-ui/react'
-import { SectionWithImage } from '../components/SectionWithImage'
-import { PrimarySlider } from '../components/CustomSlider'
+import { PrimaryBanner, PrimarySlider, PrimarySection, SectionWithImage } from '../components'
+// import { BenefitsCard } from '../components';
 import Home1  from '../../assets/img/home_1.jpg'
 import Home2  from '../../assets/img/home_2.jpg'
-// import { SecondaryCard } from '../components/SecondaryCard';
-// import { BenefitsCard } from '../components/BenefitsCard';
-import { PrimarySection } from '../components/PrimarySection'
-import { PrimaryBanner } from '../components/PrimaryBanner'
 import BannerHome from '../../assets/img/banner_1.jpg'
 
 export const HomePage = () => {

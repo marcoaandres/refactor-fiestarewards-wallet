@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, CardFooter, Heading, Image, Link, ListItem, Stack, Tag, Text, UnorderedList } from "@chakra-ui/react"
+import { Button, Card, CardBody, CardFooter, Heading, Image, Link, ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react"
 type BenefitsCardProps = {
     image: string,
     imageDescription: string,

@@ -1,4 +1,4 @@
-import { AppRouter } from "./router/AppRouter"
+import { AppRouter } from "./wallet/router/AppRouter"
 
 function App() {
   return (

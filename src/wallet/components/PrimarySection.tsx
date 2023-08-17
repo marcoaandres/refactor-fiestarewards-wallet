@@ -1,5 +1,4 @@
 import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
-import React from "react";
 
 type PrimarySectionProps = {
     title: string,

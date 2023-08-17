@@ -1,5 +1,5 @@
-import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons"
 import { Box } from "@chakra-ui/react"
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons"
 
 type ButtonToggleProps = {
     isOpen: boolean,

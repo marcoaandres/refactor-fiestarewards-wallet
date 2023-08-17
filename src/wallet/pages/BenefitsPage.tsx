@@ -1,5 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/react"
-import { SecondaryCard } from "../components/SecondaryCard"
+import { SecondaryCard } from "../components"
 
 export const BenefitsPage = () => {
   return (
