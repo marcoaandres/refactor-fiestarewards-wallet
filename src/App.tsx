@@ -1,8 +1,11 @@
-import { AppRouter } from "./wallet/router/AppRouter"
+import {AuthProvider} from './auth/context'
+import { AppRouter } from './router/AppRouter'
 
 function App() {
   return (
-   <AppRouter/>
+    <AuthProvider>
+      <AppRouter/>
+    </AuthProvider>
   )
 }
 
