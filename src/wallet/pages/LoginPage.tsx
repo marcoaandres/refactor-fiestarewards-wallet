@@ -21,8 +21,8 @@ export const LoginPage = () => {
   return (
     <>
     <Grid templateColumns='repeat(12, 1fr)' gap="4">
-        <GridItem colSpan={4}/>
-        <GridItem colSpan={4}>
+        <GridItem colSpan={{base: 1, md:4}}/>
+        <GridItem colSpan={{base: 10, md:4}}>
           <Box mt="56px" mb="36px">
               <Heading size="title">Login</Heading>
           </Box>
@@ -47,7 +47,7 @@ export const LoginPage = () => {
           </Grid>
         </Stack>
         </GridItem>
-        <GridItem colSpan={3}/>
+        <GridItem colSpan={{base: 1, md:4}}/>
     </Grid>
     </>
   )
