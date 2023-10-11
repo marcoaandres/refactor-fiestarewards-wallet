@@ -10,7 +10,7 @@ export const WalletNavbar = () => {
     console.log(user)
 
     const navigate = useNavigate()
-    const onLogout = () => {
+    const onLogout = (): void => {
         logout()
         
         navigate('/', {
@@ -18,8 +18,8 @@ export const WalletNavbar = () => {
         })
     }
 
-    const [isOpen, setIsOpen] = useState(false)
-    const toggleButton = () => setIsOpen(!isOpen)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const toggleButton = (): void => setIsOpen(!isOpen)
 
 
   return (
@@ -116,27 +116,6 @@ export const WalletNavbar = () => {
                     <Button variant='secondary' as={ReactLink} to='/register'>Sign Up</Button>
                     <Button as={ReactLink} to='/login'>Log in</Button>
                 </Stack>
-                {/* <Stack
-                    direction={['row']}
-                    align="center"
-                    gap="3"  
-                    order="6"
-                    justify={['center']} 
-                    cursor="pointer"
-                    onClick={onLogout}  
-                    display={{ base: 'none', md: `${!user ? 'none' : 'inherit'}` }}
-                >
-                    <Box>
-                        <Text fontWeight="300" fontSize="14px" color="primary.10">
-                            {user?.name}
-                        </Text>
-                        <Text fontWeight="400" fontSize="14px" color="primary.10">
-                            {user?.lastName}
-                        </Text>
-                    </Box>
-                    <Avatar src='' size="sm" bg="primary.10" />
-                </Stack> */}
-                
                 <Menu>
                 <MenuButton
                     order="6" 
