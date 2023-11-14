@@ -1,58 +1,49 @@
 import { useReducer } from 'react'
 import { AuthContext } from './AuthContext'
 import { AuthReducer } from './AuthReducer'
-// import { types } from '../types/types'
-import { UserState } from '../../interfaces/interfaces'
+import { AuthState, User } from '../../interfaces/interfaces'
 
 type AuthProviderProps = {
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[]
 }
-const INITIAL_STATE: UserState = {
-    isLogged: false,
+//  
+const INITIAL_STATE: AuthState = {
+    isLogged: false
 }
 // FUNCION INICIADORA PARA EL REDUCER
 const init = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const localStorageData = localStorage.getItem('user');
+    const userData = localStorageData ? JSON.parse(localStorageData) : '';
 
     return {
-        isLogged: !!user,
-        user
+        isLogged: !!userData,
+        user: userData
     }
 }
+
+// esto es un HOC higher-order component, que recibe un children
 export const AuthProvider = ({ children } : AuthProviderProps) => {
     // utilizamos el reducer
-    const [state, dispach] = useReducer(AuthReducer, INITIAL_STATE, init);
+    const [authState, dispach] = useReducer(AuthReducer, INITIAL_STATE, init);
 
-    // FUNCION QUE SE MANDA A LLMAR CUANDO EL USUARIO HACE LOGIN
-    const login = ({name = '', lastName=''}) => {
-        const user = {
-            id: '1231232',
-            name,
-            lastName
-        };
-        const action = {
-            type: 'login',
-            payload: user
-        }
-
+    // FUNCION QUE SE MANDA A LLAMAR CUANDO EL USUARIO HACE LOGIN
+    const login = (user: User) => {        
         // GUARDANDO USUARIO EN LOCALSTORAGE
         localStorage.setItem('user', JSON.stringify(user));
         // DESPACHANDO LA ACCION
-        dispach(action);
+        dispach({ type: 'LOGIN', payload: user });
     }
 
     // FUNCION QUE SE MANDA A LLMAR CUANDO EL USUARIO HACE LOGOUT
     const logout = () => {
         localStorage.removeItem('user');
-        const action = {
-            type: "logout",
-        };
-        dispach(action);
+        dispach({type: 'LOGOUT'});
     }
 
     return (
+        // value se expone globalmente a la app
         <AuthContext.Provider value={{
-            ...state,
+            authState,
             // METODOS
             login,
             logout

@@ -6,7 +6,7 @@ export interface User{
     lastName: string
 }
 
-export interface UserState{
+export interface AuthState{
     isLogged: boolean
     user?: User
 }

@@ -1,18 +1,17 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link as ReactLink, useNavigate } from 'react-router-dom'
 import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButton, MenuItem, MenuList,  Stack, Text } from '@chakra-ui/react'
 import logoFr from "../assets/img/logo_FR.svg";
 import { ButtonToggle } from '../wallet/components/ButtonToggle';
-import { AuthContext } from '../auth/context';
+import { useAuth } from '../hooks/useAuth';
 
 export const WalletNavbar = () => {
-    const { user, logout } = useContext(AuthContext)
-    console.log(user)
+    const { user, logout } = useAuth()
 
     const navigate = useNavigate()
     const onLogout = (): void => {
         logout()
-        
+        localStorage.clear()
         navigate('/', {
             replace: true
         })
@@ -83,7 +82,6 @@ export const WalletNavbar = () => {
                         md: 'auto',
                     }}
                 >
-                    <Link as={ReactLink} to='/' px='12px' py='16px' display={`${user ? 'init' : 'none'}`} variant='underline'>My Perfil</Link>
                     <Link as={ReactLink} to='/' px='12px' py='16px' variant='underline'>Home</Link>
                     <Link as={ReactLink} to='/my-memberships' display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline'>My Memberships</Link>
                     <Link as={ReactLink} to='/benefits' px='12px' py='16px' variant='underline'>Benefits</Link>

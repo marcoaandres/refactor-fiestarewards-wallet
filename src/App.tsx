@@ -3,6 +3,7 @@ import { AppRouter } from './router/AppRouter'
 
 function App() {
   return (
+    // Con AuthProvider se exponen todas el contecto (las variables y metodos) a AppRouter
     <AuthProvider>
       <AppRouter/>
     </AuthProvider>

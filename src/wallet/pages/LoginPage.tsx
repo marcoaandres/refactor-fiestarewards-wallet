@@ -1,18 +1,19 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Grid, GridItem, Heading, Input, InputGroup, InputRightElement, Stack } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { AuthContext } from '../../auth/context';
+import { useAuth } from '../../hooks/useAuth';
 
 export const LoginPage = () => {
   const [show, setShow] = useState(false)
   const onShowPasword = () => setShow(!show)
 
   const navigate = useNavigate()
-  const { login } = useContext( AuthContext )
+  const { login } = useAuth()
   const onLogin = () => {
-    const lastPath: string = localStorage.getItem('lastPath' || '/');
-    login({name: 'Marco', lastName: 'Andrés'});
+    const pathInls: string | null = localStorage.getItem('lastPath');
+    const lastPath: string = pathInls || '/' ;
+    login({ id: '12211324', name: 'Marco', lastName: 'Andrés'});
 
     navigate(lastPath, {
         replace: true
