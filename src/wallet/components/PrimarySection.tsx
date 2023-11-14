@@ -4,10 +4,10 @@ type PrimarySectionProps = {
     title: string,
     subtitle?: string,
     node?: React.ReactNode;
-    child?: React.ReactNode;
+    children?: React.ReactNode | React.ReactNode[];
 }
 
-export const PrimarySection = ( {title, child, node, subtitle}: PrimarySectionProps ) => {
+export const PrimarySection = ( {title, children, node, subtitle}: PrimarySectionProps ) => {
   return (
     <Grid templateColumns='repeat(12, 1fr)' gap="4">
         <GridItem colSpan={1}/>
@@ -17,7 +17,7 @@ export const PrimarySection = ( {title, child, node, subtitle}: PrimarySectionPr
                 <Heading size="subtitle">{subtitle}</Heading>
                 {node}
             </Box>
-            {child}
+            {children}
         </GridItem>
         <GridItem colSpan={1}/>
     </Grid>
