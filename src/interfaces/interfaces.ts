@@ -11,3 +11,23 @@ export interface AuthState{
     user?: User
 }
 
+export interface ResponsePromotion{
+    idPromo: string,
+    imagenSlider: string,
+    titulo: string,
+    texto: string,
+    terminos: string,
+    producto: string,
+    textoBoton: string,
+    url: string,
+}
+
+export interface ResponseMemberships{
+    desktopImage: string,
+    nameMembership: string,
+    titleBenefits: string,
+    benefits: string[],
+    buttonText: string,
+    url: string,
+}
+

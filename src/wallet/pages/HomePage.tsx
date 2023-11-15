@@ -1,16 +1,50 @@
+import { useEffect, useState } from 'react'
 import { Link as ReactLink } from 'react-router-dom'
-import { Box, Button, Flex, FormLabel, Grid, GridItem, Heading, Input, InputGroup, Stack, Text } from '@chakra-ui/react'
+import { Button, Flex, Text, useDisclosure } from '@chakra-ui/react'
 import { PrimaryBanner, PrimarySlider, PrimarySection, SectionWithImage, PrimaryCard } from '../components'
-// import { BenefitsCard } from '../components';
 import Home1  from '../../assets/img/home_1.jpg'
 import Home2  from '../../assets/img/home_2.jpg'
 import BannerHome from '../../assets/img/banner_1.jpg'
 import { SwiperSlide } from 'swiper/react'
 import { TirthCard } from '../components/TirthCard'
 import { useAuth } from '../../hooks/useAuth'
+import { PrimaryModal } from '../components/PrimaryModal'
+import { ResponseMemberships, ResponsePromotion } from '../../interfaces/interfaces'
+import { AuxCard } from '../components/AuxCard'
 
 export const HomePage = () => {
   const {isLogged} = useAuth();
+  const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
+  const [memberships, setMemberships] = useState<ResponseMemberships[]>([])
+  useEffect(() => {
+    fetch(' http://localhost:5000/promotions')
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      setPromotions(data)
+    })  
+  }, [])
+
+  useEffect(() => {
+    fetch(' http://localhost:5000/memberships')
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      setMemberships(data)
+    })  
+  }, [])
+  
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [modalPromo, setModalPromo] = useState<ResponsePromotion>();
+
+  const showModalPromotion = (id: string) => {
+    const promo = promotions.find(({idPromo}) => idPromo == id)
+    setModalPromo(promo)
+    onOpen()
+  }
+
   return (
     <>  
       { 
@@ -67,81 +101,26 @@ export const HomePage = () => {
       <PrimarySection
         title="Promociones especiales para ti"
         subtitle="Desliza y descubre todas las opciones."
-        node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} to='/'>Ver todos</Button></Flex>}
-        // child={<PrimarySlider/>}
+        node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} to='/benefits'>Ver todos</Button></Flex>}
       >
         <PrimarySlider>
-        <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='1 Martes y jueves de puntos FR a precio especial' 
-            description='1 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='1 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='1 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='2 Martes y jueves de puntos FR a precio especial' 
-            description='2 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='2 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='2 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='3 Martes y jueves de puntos FR a precio especial' 
-            description='3 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='3 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='3 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='4 Martes y jueves de puntos FR a precio especial' 
-            description='4 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='4 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='4 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='5 Martes y jueves de puntos FR a precio especial' 
-            description='5 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='5 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='5 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='6 Martes y jueves de puntos FR a precio especial' 
-            description='6 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='6 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='6 Conocer más' />
-          </SwiperSlide>
+          {
+            promotions.map(({idPromo, titulo, texto, terminos, producto, imagenSlider, url, textoBoton}) => (
+              <SwiperSlide key={idPromo}>
+                <PrimaryCard 
+                  id={idPromo}
+                  image={imagenSlider}
+                  imageDescription={idPromo} 
+                  title={titulo}
+                  description={texto}
+                  terms={terminos}
+                  tag={producto}
+                  redirect={url}
+                  textButton={textoBoton}
+                  showModalPromotion={showModalPromotion} />
+            </SwiperSlide>
+            ))
+          }
         </PrimarySlider>
       </PrimarySection>
       <SectionWithImage 
@@ -154,80 +133,23 @@ export const HomePage = () => {
       <PrimarySection
         title="Nuestras membresías"
         subtitle="Asómbrate con todo lo que tenemos para ti."
-        // child={<PrimarySlider/>}
       >
         <PrimarySlider>
-        <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='1 Martes y jueves de puntos FR a precio especial' 
-            description='1 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='1 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='1 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='2 Martes y jueves de puntos FR a precio especial' 
-            description='2 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='2 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='2 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='3 Martes y jueves de puntos FR a precio especial' 
-            description='3 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='3 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='3 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='4 Martes y jueves de puntos FR a precio especial' 
-            description='4 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='4 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='4 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='5 Martes y jueves de puntos FR a precio especial' 
-            description='5 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='5 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='5 Conocer más' />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <PrimaryCard 
-            image='https://via.placeholder.com/274x175' 
-            imageDescription='Green double couch with wooden legs' 
-            title='6 Martes y jueves de puntos FR a precio especial' 
-            description='6 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='6 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='6 Conocer más' />
-          </SwiperSlide>
+          {
+            memberships.map(({ desktopImage, titleBenefits, nameMembership, benefits, url, buttonText   }) => (
+              <SwiperSlide key={titleBenefits}>
+                <AuxCard 
+                  image={desktopImage} 
+                  imageDescription={'Imagen random'}
+                  title={nameMembership} 
+                  subtitle={titleBenefits}
+                  benefits={benefits}
+                  redirect={url}
+                  textButton={buttonText}
+                />
+              </SwiperSlide>
+            ))
+          }    
         </PrimarySlider>
       </PrimarySection>
       <SectionWithImage 
@@ -239,18 +161,16 @@ export const HomePage = () => {
         child={<Button as={ReactLink} to='/login' mt="6">Ingresar</Button>}
       />
 
-
-
-    {/* item nuestras membresias  */}
-      {/* <BenefitsCard
-        image='https://via.placeholder.com/274x175' 
-        imageDescription='Green double couch with wooden legs' 
-        title='Live Aqua Residence Club' 
-        subtitle='Club de Residencias Vacacionales y experiencias de viaje'
-        benefits={['Early Check in y Late Check out.', 'Up grade de habitación.', '25% o 15% de descuento en servicio de Spa.', '25% de descuento en alimentos y bebidas.']} 
-        redirect='https://wallet.fiestarewards.com' 
-        textButton='Más información'
-      /> */}
+      {
+        !!modalPromo && 
+        <PrimaryModal 
+          isOpen={isOpen} 
+          onClose={onClose}  
+          terminos={modalPromo.terminos} 
+          textoBoton={modalPromo.textoBoton}
+          redirectTo={modalPromo.url}
+        />
+      }
     </>
   )
 }

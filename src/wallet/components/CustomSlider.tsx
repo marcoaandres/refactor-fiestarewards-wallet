@@ -16,7 +16,7 @@ type PrimarySliderProps = {
   children: React.ReactNode | React.ReactNode[]
 }
 
-export const PrimarySlider = ({children, slides=2}: PrimarySliderProps)  => {
+export const PrimarySlider = ({children, slides = 3}: PrimarySliderProps)  => {
   return (
   <Grid templateColumns='repeat(12, 1fr)' gap="4">
       <GridItem colSpan={1}>

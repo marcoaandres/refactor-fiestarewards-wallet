@@ -37,6 +37,17 @@ const Button =  defineStyleConfig({
                 }
             },
         },
+        'ghost':{
+            color: 'primary.10',
+            _hover: {
+                bg: 'primary.50',
+                transition: '300ms',
+                _disabled: {
+                    bg: 'neutral.20',
+                    opacity: 1,
+                }
+            },
+        }
     },
     defaultProps: {
         variant: 'primary',

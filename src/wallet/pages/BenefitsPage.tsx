@@ -1,56 +1,67 @@
-import { Grid, GridItem } from "@chakra-ui/react"
+import { useEffect, useState } from "react"
+import { Grid, GridItem, useDisclosure } from "@chakra-ui/react"
 import { SecondaryCard } from "../components"
+import { ResponsePromotion } from "../../interfaces/interfaces"
+import { PrimaryModal } from "../components/PrimaryModal"
 
 export const BenefitsPage = () => {
+  const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
+
+  useEffect(() => {
+    fetch(' http://localhost:5000/promotions')
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      setPromotions(data)
+    })  
+  }, [])
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [modalPromo, setModalPromo] = useState<ResponsePromotion>();
+
+  const showModalPromotion = (id: string) => {
+    const promo = promotions.find(({idPromo}) => idPromo == id)
+    setModalPromo(promo)
+    onOpen()
+  }
+
   return (
     <>
       <h1>Benefits</h1>
       <Grid templateColumns='repeat(12, 1fr)' gap="4">
         <GridItem colSpan={1}/>
         <GridItem colSpan={10} my="16px">
-          <SecondaryCard 
-            image='https://via.placeholder.com/401x256' 
-            imageDescription='Green double couch with wooden legs' 
-            title='5 Martes y jueves de puntos FR a precio especial' 
-            description='5 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='5 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='5 Conocer más' 
-          />
-          <SecondaryCard 
-            image='https://via.placeholder.com/401x256' 
-            imageDescription='Green double couch with wooden legs' 
-            title='5 Martes y jueves de puntos FR a precio especial' 
-            description='5 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='5 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='5 Conocer más' 
-          />
-          <SecondaryCard 
-            image='https://via.placeholder.com/401x256' 
-            imageDescription='Green double couch with wooden legs' 
-            title='5 Martes y jueves de puntos FR a precio especial' 
-            description='5 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='5 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='5 Conocer más' 
-          />
-          <SecondaryCard 
-            image='https://via.placeholder.com/401x256' 
-            imageDescription='Green double couch with wooden legs' 
-            title='5 Martes y jueves de puntos FR a precio especial' 
-            description='5 Ahora, ya puedes comprar los puntos Fiesta Rewards que necesites para tener los mejores beneficios en todas las estancias que realizas de ahora en adelante.' 
-            terms='5 Consulta términos y condiciones.' 
-            tag=' Fiesta Rewards' 
-            redirect='https://wallet.fiestarewards.com' 
-            textButton='5 Conocer más' 
-          />
+          {
+            promotions.map(({idPromo, titulo, texto, terminos, producto, imagenSlider, url, textoBoton}) => (
+              <SecondaryCard 
+                  key={idPromo}
+                  id={idPromo}
+                  image={imagenSlider}
+                  imageDescription={idPromo} 
+                  title={titulo}
+                  description={texto}
+                  terms={terminos}
+                  tag={producto}
+                  redirect={url}
+                  textButton={textoBoton}
+                  showModalPromotion={showModalPromotion}
+                />
+            ))
+          }
         </GridItem>
-      <GridItem colSpan={1}/>
-  </Grid>
+        <GridItem colSpan={1}/>
+      </Grid>
+      {
+        !!modalPromo && 
+        <PrimaryModal 
+          isOpen={isOpen} 
+          onClose={onClose}  
+          terminos={modalPromo.terminos} 
+          textoBoton={modalPromo.textoBoton}
+          redirectTo={modalPromo.url}
+        />
+      }
     </>
   )
 }
