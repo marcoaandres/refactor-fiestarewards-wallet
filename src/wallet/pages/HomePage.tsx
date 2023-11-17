@@ -13,7 +13,7 @@ import { ResponseMemberships, ResponsePromotion } from '../../interfaces/interfa
 import { AuxCard } from '../components/AuxCard'
 
 export const HomePage = () => {
-  const {isLogged} = useAuth();
+  const {isLogged, user} = useAuth();
   const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
   const [memberships, setMemberships] = useState<ResponseMemberships[]>([])
   useEffect(() => {
@@ -58,7 +58,7 @@ export const HomePage = () => {
       {
         isLogged &&
         <PrimarySection
-        title="Hola, Marco Andrés"
+        title={`Hola, ${user?.name} ${user?.lastName}`}
         subtitle="Estas son tus membresías. Para ver más información, haz clic sobre la tarjeta."
         node={
           <>
