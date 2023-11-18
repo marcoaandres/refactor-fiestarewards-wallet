@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Form, Formik } from 'formik'
-import * as yup from 'yup'
+import { string, object, InferType } from 'yup'
 import { Box, Button, FormControl, FormErrorMessage, Grid, GridItem, Heading, Input, InputGroup, InputRightElement, Stack, useDisclosure } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useAuth } from '../../hooks/useAuth'
@@ -11,16 +11,16 @@ const initialValues = {
   email: 'marco@andres.com',
   password: 'tDhs40k7xV',
 }
-const validationSchema = yup.object({
-  email: yup
-    .string('Introduce tu correo electrónico')
-    .email('Introduzca un correo electrónico válido')
-    .required('Este campo es requerido'),
-  password: yup
-    .string('Ingresa tu contraseña')
-    .min(8, 'La contraseña debe tener una longitud mínima de 8 caracteres.')
-    .required('Este campo es requerido'),
+const loginSchema = object({
+  email: string()
+    .required('Este campo es requerido')
+    .email('Introduzca un correo electrónico válido'),
+  password: string()
+    .required('Este campo es requerido')
+    .min(8, 'La contraseña debe tener una longitud mínima de 8 caracteres.'),
 })
+
+type Login = InferType<typeof loginSchema>
 
 export const LoginPage = () => {
   const [titleAlert, setTitleAlert] = useState('')
@@ -36,7 +36,7 @@ export const LoginPage = () => {
 
   const onShowPasword = () => setShow(!show)
   
-  const handlerLogin = ({email, password}) => {
+  const handlerLogin = ({email, password}: Login ) => {
     fetch(`http://localhost:5000/users?email=${email}&pass=${password}`)
     .then(response => {
       if(!response.ok){
@@ -79,7 +79,7 @@ export const LoginPage = () => {
     <>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={loginSchema}
         onSubmit={(values) => handlerLogin(values)}
       >
         {(formik) => {

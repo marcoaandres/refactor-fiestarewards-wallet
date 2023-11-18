@@ -15,7 +15,6 @@ type UserAction =
  * @returns - el estado no se muta, simplemente se retorna un nuevo estado con los argumentos recibidos
  */
 export const AuthReducer = ( state: AuthState, action: UserAction ): AuthState => {
-    console.log(state)
     switch (action.type) {
         case 'LOGIN':
             return {

@@ -4,8 +4,26 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useAuth } from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { Form, Formik } from 'formik'
-import * as yup from 'yup';
+import { string, object, ref, InferType } from 'yup'
 import { CustomAlert } from '../components/CustomAlert'
+
+const registerSchema = object({
+  name: string()
+    .required('Este campo es requerido')
+    .min(4, 'El nombre  debe tener una longitud mínima de 4 caracteres.'),
+  lastName: string()
+    .required('Este campo es requerido')
+    .min(4, 'El apellido debe tener una longitud mínima de 4 caracteres.'),
+  email: string()
+    .required('Este campo es requerido')
+    .email('Introduzca un correo electrónico válido'),
+  password: string()
+    .required('Este campo es requerido')
+    .min(8, 'La contraseña debe tener una longitud mínima de 8 caracteres.'),
+  confirmPassword: string()
+    .oneOf([ref("password")], "Las contraseñas no coinciden")
+    .required('Confirma tu contraseña'),
+})
 
 const initialValues = {
   name: "",
@@ -14,28 +32,8 @@ const initialValues = {
   password: "",
   confirmPassword: "",
 }
-const validationSchema = yup.object({
-  name: yup
-    .string('Ingresa tu nombre')
-    .min(4, 'El nombre  debe tener una longitud mínima de 4 caracteres.')
-    .required('Este campo es requerido'),
-    lastName: yup
-    .string('Ingresa tu apellido')
-    .min(4, 'El apellido debe tener una longitud mínima de 4 caracteres.')
-    .required('Este campo es requerido'),
-  email: yup
-    .string('Introduce tu correo electrónico')
-    .email('Introduzca un correo electrónico válido')
-    .required('Este campo es requerido'),
-  password: yup
-    .string('Ingresa tu contraseña')
-    .min(8, 'La contraseña debe tener una longitud mínima de 8 caracteres.')
-    .required('Este campo es requerido'),
-    confirmPassword: yup
-    .string('Ingresa tu contraseña')
-    .required('Confirma tu contraseña')
-    .oneOf([yup.ref("password")], "Las contraseñas no coinciden")
-})
+
+type Register = InferType<typeof registerSchema>
 
 const createId = Date.now()
 
@@ -58,7 +56,7 @@ export const RegisterPage = () => {
   const { login } = useAuth()
    const navigate = useNavigate()
 
-  const handleRegister = (values) => {
+  const handleRegister = (values: Register) => {
     const {
       name,
       lastName,
@@ -116,7 +114,7 @@ export const RegisterPage = () => {
     <>
       <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={registerSchema}
       onSubmit={(values) => handleRegister(values)}
       >
       {(formik) => {
@@ -209,9 +207,9 @@ export const RegisterPage = () => {
       }}
     </Formik>
     {
-        isVisible &&
-        <CustomAlert title={titleAlert} onClose={onClose}/>
-      }
+      isVisible &&
+      <CustomAlert title={titleAlert} onClose={onClose}/>
+    }
     </>
   )  
 }
