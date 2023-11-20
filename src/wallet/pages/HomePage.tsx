@@ -38,7 +38,7 @@ export const HomePage = () => {
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:5000/partnerPrograms?memberNumber=${user.memberNumber}`)
+    fetch(`http://localhost:5000/partnerPrograms?memberNumber=${user?.memberNumber}`)
     .then(resp => {
       return resp.json()
     })

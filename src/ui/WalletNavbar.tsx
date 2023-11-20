@@ -23,7 +23,7 @@ export const WalletNavbar = () => {
 
   return (
     <Grid templateColumns='repeat(12, 1fr)' gap="0"  
-        boxShadow="base" 
+        boxShadow={{base: isOpen ? "none" : "base", md: "base"}} 
         position="sticky" 
         top="0" 
         left="0" 
@@ -34,11 +34,13 @@ export const WalletNavbar = () => {
         <GridItem colSpan={10}>
             <Flex as="nav"
             justify={{base: "space-between", md: "start"}}
-            alignItems={{base: "start", md: "center"}}
+            alignItems={"center"}
             wrap={{base:"wrap", md:"nowrap"}}
             w="100%" 
             padding={{base:"12px 0", md: "12px"}} 
-            flex={"1 1 auto"}>
+            flex={"1 1 auto"}
+            
+            >
             <Link as={ReactLink} to='/' order="1" mr="auto">
                 <Image src={logoFr} htmlWidth="90px" alt="logotipo de Fiesta Rewards" />
             </Link>
@@ -49,15 +51,19 @@ export const WalletNavbar = () => {
                 w={{base: '100%', md: 'auto'}} 
                 display={{base: isOpen ? "flex" : "none", md:"flex"}}
                 direction={{base: 'column', md: 'row'}}
+                position={{base: "fixed", md: "initial"}}
+                top="70"
+                left="0"
+                bgColor="white"
+                p={{base: "24px", md: "0"}}
+                boxShadow={{base: "base", md: "none"}} 
             >
                 <Stack
                     direction={['row']}
                     align="center"
                     gap="3"  
                     order="5"
-                    // justify={['center']} 
                     cursor="pointer"
-                    onClick={onLogout}  
                     display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}
                 >
                     

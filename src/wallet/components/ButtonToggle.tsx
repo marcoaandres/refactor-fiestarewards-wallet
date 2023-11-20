@@ -9,7 +9,7 @@ type ButtonToggleProps = {
 export const ButtonToggle = ({toggle, isOpen, order}: ButtonToggleProps) => {
   return (
     <Box display={{base: 'block', md: 'none'}} onClick={toggle} order={order}>
-        {isOpen ? <CloseIcon/> : <HamburgerIcon/>}
+        {isOpen ? <CloseIcon boxSize={4}/> : <HamburgerIcon boxSize={6}/>}
     </Box>
   )
 }
