@@ -32,3 +32,17 @@ export interface ResponseMemberships{
     url: string,
 }
 
+export interface memberInfo{
+    ownerNumber : string,
+    availablePoints : string,
+    level : string,
+    nextLevel : string,
+    pointsNextLevel : string
+}
+
+export interface ResponsePartnerPrograms{
+    program: string,
+    programImage: string,
+    member: memberInfo
+}
+

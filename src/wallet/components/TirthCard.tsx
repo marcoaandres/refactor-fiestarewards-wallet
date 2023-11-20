@@ -4,10 +4,9 @@ type TirthCardProps = {
     imageDescription: string,
     membershipNumber: string,
     pointsAvailable: string,
-    contractedPoints: string
 }
 
-export const TirthCard = ({image, membershipNumber, pointsAvailable, contractedPoints}: TirthCardProps )  => {
+export const TirthCard = ({image, membershipNumber, pointsAvailable}: TirthCardProps )  => {
     return (
         <Card
         direction={{ base: 'column', sm: 'row' }}
@@ -29,14 +28,6 @@ export const TirthCard = ({image, membershipNumber, pointsAvailable, contractedP
             <Text fontSize={{ base: '14px', md: '24px'}} color="#FFF" fontWeight="400" mb="24px">
                 {pointsAvailable}
             </Text>
-            <Box display={ contractedPoints ? '' : 'none'}>
-                <Text fontSize={{base: '14px'}} color="#FFF" fontWeight="350">
-                    Puntos Vencidos
-                </Text>
-                <Text fontSize={{ base: '14px', md: '24px'}} color="#FFF" fontWeight="400">
-                    {contractedPoints}
-                </Text>
-            </Box>
         </Box>
         </CardBody>
     </Card>

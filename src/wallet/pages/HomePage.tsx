@@ -9,14 +9,14 @@ import { SwiperSlide } from 'swiper/react'
 import { TirthCard } from '../components/TirthCard'
 import { useAuth } from '../../hooks/useAuth'
 import { PrimaryModal } from '../components/PrimaryModal'
-import { ResponseMemberships, ResponsePromotion } from '../../interfaces/interfaces'
+import { ResponseMemberships, ResponsePartnerPrograms, ResponsePromotion } from '../../interfaces/interfaces'
 import { AuxCard } from '../components/AuxCard'
 
 export const HomePage = () => {
   const {isLogged, user} = useAuth();
   const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
   const [memberships, setMemberships] = useState<ResponseMemberships[]>([])
-  const [partnerPrograms, setPartnerPrograms] = useState([])
+  const [partnerPrograms, setPartnerPrograms] = useState<ResponsePartnerPrograms[]>()
   useEffect(() => {
     fetch(' http://localhost:5000/promotions')
     .then(resp => {
@@ -68,7 +68,7 @@ export const HomePage = () => {
       />
       }
       {
-        isLogged &&
+        (isLogged && partnerPrograms) &&
         <PrimarySection
         title={`Hola, ${user?.name} ${user?.lastName}`}
         subtitle="Estas son tus membresías. Para ver más información, haz clic sobre la tarjeta."
@@ -80,14 +80,13 @@ export const HomePage = () => {
         }>
         <PrimarySlider slides={2}>
           {
-            partnerPrograms.map(({programImage, member }, i) => (
+            partnerPrograms.map(({programImage, member }, i)  => (
               <SwiperSlide key={i}>
                 <TirthCard 
                   image={programImage}
                   imageDescription="Description"
-                  membershipNumber={member?.ownerNumber}
-                  pointsAvailable={member?.availablePoints}
-                  contractedPoints={member?.pointsHired}  />
+                  membershipNumber={member.ownerNumber}
+                  pointsAvailable={member.availablePoints}  />
               </SwiperSlide>
             ))
           }
