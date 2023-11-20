@@ -55,12 +55,12 @@
       ],
       "fechaInicio": "2022-08-25",
       "fechaFin": "2024-12-19",
-      "imagenSlider": "http://10.143.161.212:8080/documents/6525419/6525783/AQWED_Silder_446x322.jpg/3c44d61a-75ac-ae15-e8b3-2625b372f7fb?t=1663292631735",
-      "imagenSliderEn": "http://10.143.161.212:8080/documents/6525419/6525783/AQWED_Silder_446x322.jpg/3c44d61a-75ac-ae15-e8b3-2625b372f7fb?t=1663292631735",
-      "imagenBannerDesk": "http://10.143.161.212:8080/documents/6525419/6525783/AQWED_Banner_Desktop_401x256.jpg/94c9ae88-f148-b9b5-bd14-1f82a8c5e165?t=1663292683530",
-      "imagenBannerDeskEn": "http://10.143.161.212:8080/documents/6525419/6525783/AQWED_Banner_Desktop_401x256.jpg/94c9ae88-f148-b9b5-bd14-1f82a8c5e165?t=1663292683530",
-      "imagenBannerMobile": "http://10.143.161.212:8080/documents/6525419/6525783/AQWED_Banner_Mobile_290x192.jpg/ab5ffb36-3986-9424-4b9f-578a5ed5497b?t=1663292714680",
-      "imagenBannerMobileEn": "http://10.143.161.212:8080/documents/6525419/6525783/AQWED_Banner_Mobile_290x192.jpg/ab5ffb36-3986-9424-4b9f-578a5ed5497b?t=1663292714680",
+      "imagenSlider": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/AQWED_Banner_Desktop_401x256.jpg",
+      "imagenSliderEn": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/AQWED_Banner_Desktop_401x256.jpg",
+      "imagenBannerDesk": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/AQWED_Banner_Desktop_401x256.jpg",
+      "imagenBannerDeskEn": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/AQWED_Banner_Desktop_401x256.jpg",
+      "imagenBannerMobile": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/AQWED_Banner_Desktop_401x256.jpg",
+      "imagenBannerMobileEn": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/AQWED_Banner_Desktop_401x256.jpg",
       "url": "https://reservations.liveaqua.com/107157?&adults=2&identifier=AQWED&languageid=2",
       "urlEn": "https://reservations.liveaqua.com/107157?&adults=2&identifier=AQWED&languageid=1",
       "promocode": "AQWED"
@@ -83,12 +83,12 @@
       "hoteles": [],
       "fechaInicio": "2023-10-03",
       "fechaFin": "2023-11-16",
-      "imagenSlider": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg/e6ca67ed-4d90-518f-5593-8e6b96a403fe?t=1699458594846",
-      "imagenSliderEn": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg/e6ca67ed-4d90-518f-5593-8e6b96a403fe?t=1699458594846",
-      "imagenBannerDesk": "http://10.143.161.212:8080/documents/6525419/6525783/Desktop.jpg/bf3e1342-1d12-8444-52e8-e93b0bac053b?t=1699458613088",
-      "imagenBannerDeskEn": "http://10.143.161.212:8080/documents/6525419/6525783/Desktop.jpg/bf3e1342-1d12-8444-52e8-e93b0bac053b?t=1699458613088",
-      "imagenBannerMobile": "http://10.143.161.212:8080/documents/6525419/6525783/Mobile.jpg/e5215538-40b7-a8ea-ff6e-57f609927bbc?t=1699458630067",
-      "imagenBannerMobileEn": "http://10.143.161.212:8080/documents/6525419/6525783/Mobile.jpg/e5215538-40b7-a8ea-ff6e-57f609927bbc?t=1699458630067",
+      "imagenSlider": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg",
+      "imagenSliderEn": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg",
+      "imagenBannerDesk": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg",
+      "imagenBannerDeskEn": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg",
+      "imagenBannerMobile": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg",
+      "imagenBannerMobileEn": "http://10.143.161.212:8080/documents/6525419/6525783/Slider.jpg",
       "url": "https://www.fiestamericanatravelty.com/ofertas",
       "urlEn": "https://www.fiestamericanatravelty.com/en/offers",
       "promocode": ""
@@ -111,12 +111,12 @@
       "hoteles": [],
       "fechaInicio": "2023-09-15",
       "fechaFin": "2023-12-15",
-      "imagenSlider": "http://10.143.161.212:8080/documents/6525419/6525783/Slider_AQS.jpg/616230df-4d87-3172-d222-27a80e269f48?t=1699462239750",
-      "imagenSliderEn": "http://10.143.161.212:8080/documents/6525419/6525783/Slider_AQS.jpg/616230df-4d87-3172-d222-27a80e269f48?t=1699462239750",
-      "imagenBannerDesk": "http://10.143.161.212:8080/documents/6525419/6525783/Desktop_AQS.jpg/41838a2b-b35c-a4c2-fd41-0842d59e5cb9?t=1699462263962",
-      "imagenBannerDeskEn": "http://10.143.161.212:8080/documents/6525419/6525783/Desktop_AQS.jpg/41838a2b-b35c-a4c2-fd41-0842d59e5cb9?t=1699462263962",
-      "imagenBannerMobile": "http://10.143.161.212:8080/documents/6525419/6525783/Mobile_AQS.jpg/81017474-c87f-899b-e900-85bd34b2e13c?t=1699462289150",
-      "imagenBannerMobileEn": "http://10.143.161.212:8080/documents/6525419/6525783/Mobile_AQS.jpg/81017474-c87f-899b-e900-85bd34b2e13c?t=1699462289150",
+      "imagenSlider": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/Desktop_AQS.jpg",
+      "imagenSliderEn": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/Desktop_AQS.jpg",
+      "imagenBannerDesk": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/Desktop_AQS.jpg",
+      "imagenBannerDeskEn": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/Desktop_AQS.jpg",
+      "imagenBannerMobile": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/Desktop_AQS.jpg",
+      "imagenBannerMobileEn": "https://cms-wallet.fiestarewards.com/documents/8401127/8401220/Desktop_AQS.jpg",
       "url": "https://reservations.fiestamericana.com/107157?languageid=2",
       "urlEn": "https://reservations.fiestamericana.com/107157?languageid=1",
       "promocode": ""
@@ -313,5 +313,172 @@
       "memberNumber": "MA1407MXE00",
       "pass": "tDhs40k7xV"
     }
+  ],
+  "partnerPrograms": [
+    {
+      "memberNumber":"MA1407MXE00",
+      "programs":[
+         {
+            "program":"FR",
+            "programImage":"https://cms-wallet.fiestarewards.com/documents/8401127/8401240/FR_Platino.png",
+            "member":{
+               "ownerNumber":"CV6572338",
+               "availablePoints":"60290",
+               "level":"Platino",
+               "pointsNextLevel":"30403",
+               "nextLevel":"Black",
+               "pointsOverdue":"0",
+               "antiguedad":"03/05/2021 00:00:00"
+            },
+            "informationPoints":{
+               "pointsExpiryNextMonth":0,
+               "pointsExpiryNextMonth2":0,
+               "pointsExpiryNextMonth3":0
+            },
+            "Redemtions":[
+               
+            ],
+            "accreditations":[
+               {
+                  "concept":"UBER* TRIP",
+                  "processDate":"11/17/2023 11:59:41",
+                  "points":"12"
+               },
+               {
+                  "concept":"UBER* TRIP",
+                  "processDate":"11/17/2023 11:59:41",
+                  "points":"33"
+               },
+               {
+                  "concept":"Yves Saint Laurent La",
+                  "processDate":"11/17/2023 11:56:34",
+                  "points":"18"
+               },
+               {
+                  "concept":"Yves Saint Laurent La",
+                  "processDate":"11/17/2023 11:56:34",
+                  "points":"3753"
+               },
+               {
+                  "concept":"STARBUCKS CCLAROCA VIL",
+                  "processDate":"11/16/2023 10:20:39",
+                  "points":"87"
+               }
+            ],
+            "certificates":[
+               {
+                  "description":"Certificado Noche Gratis Consumos",
+                  "number":"FRNG00195249689",
+                  "expiration":"12/31/2023 00:00:00",
+                  "memberType":"SANTANDER1"
+               },
+               {
+                  "description":"Certificado Noche Gratis Consumos",
+                  "number":"FRNG00195345023",
+                  "expiration":"02/28/2024 00:00:00",
+                  "memberType":"SANTANDER1"
+               },
+               {
+                  "description":"Certificado Noche Gratis Consumos",
+                  "number":"FRNG00195347204",
+                  "expiration":"03/01/2024 00:00:00",
+                  "memberType":"SANTANDER1"
+               },
+               {
+                  "description":"Certificado Noche Gratis Consumos",
+                  "number":"FRNG00195434901",
+                  "expiration":"04/13/2024 00:00:00",
+                  "memberType":"SANTANDER1"
+               },
+               {
+                  "description":"Certificado 50% Aniversario",
+                  "number":"1-15246809370",
+                  "expiration":"09/26/2024 00:00:00",
+                  "memberType":"NOCHEPREMIO"
+               },
+               {
+                  "description":"Certificado 50% Aniversario",
+                  "number":"1-15246809369",
+                  "expiration":"09/26/2024 00:00:00",
+                  "memberType":"NOCHEPREMIO"
+               },
+               {
+                  "description":"Certificado 50% Aniversario",
+                  "number":"1-15246809368",
+                  "expiration":"09/26/2024 00:00:00",
+                  "memberType":"NOCHEPREMIO"
+               },
+               {
+                  "description":"Certificado Noche Gratis Aniversario",
+                  "number":"FRNG00195756757",
+                  "expiration":"09/26/2024 00:00:00",
+                  "memberType":"SANTANDER1"
+               },
+               {
+                  "description":"Certificado Noche Gratis Aniversario",
+                  "number":"FRNG00195756758",
+                  "expiration":"09/26/2024 00:00:00",
+                  "memberType":"SANTANDER1"
+               },
+               {
+                  "description":"Certificado Noche Gratis Consumos",
+                  "number":"FRNG00195852083",
+                  "expiration":"11/17/2024 00:00:00",
+                  "memberType":"SANTANDER1"
+               }
+            ]
+         },
+         {
+            "program":"AP",
+            "programImage": "https://cms-wallet.fiestarewards.com/documents/8401127/8401240/Apreciare.png",
+            "member":{
+               "ownerNumber":"1420203",
+               "availablePoints":"10500",
+               "antiguedad":"01/23/2023 13:15:10",
+                "pointsOverdue":"0"
+            },
+            "informationPoints":{
+              "pointsExpiryNextMonth":0,
+              "pointsExpiryNextMonth2":0,
+              "pointsExpiryNextMonth3":0
+           },
+            "lastReservation":[
+               {
+                  "hotelName":"The Explorean Kohunlich All Inclusive",
+                  "reservationCode":"810786561",
+                  "reservationDate":"2023-07-13 00:00:00",
+                  "checkIn":"2023-08-08 00:00:00",
+                  "checkOut":"2023-08-14 00:00:00",
+                  "currency":"USD",
+                  "usedPoints":"3500",
+                  "cashMount":"0",
+                  "programaReserva":"FAVC"
+               },
+               {
+                  "hotelName":"The Explorean Kohunlich All Inclusive",
+                  "reservationCode":"810784337",
+                  "reservationDate":"2023-07-13 00:00:00",
+                  "checkIn":"2023-08-08 00:00:00",
+                  "checkOut":"2023-08-14 00:00:00",
+                  "currency":"USD",
+                  "usedPoints":"3500",
+                  "cashMount":"0",
+                  "programaReserva":"FAVC"
+               },
+               {
+                  "hotelName":"Fiesta Americana Hacienda Galindo",
+                  "reservationCode":"588399288",
+                  "reservationDate":"2023-01-17 00:00:00",
+                  "checkIn":"2023-02-25 00:00:00",
+                  "checkOut":"2023-02-26 00:00:00",
+                  "currency":"USD",
+                  "usedPoints":"600",
+                  "cashMount":"0",
+                  "programaReserva":"FAVC"
+               }
+            ]
+         }
+      ]
+   }
   ]
 }

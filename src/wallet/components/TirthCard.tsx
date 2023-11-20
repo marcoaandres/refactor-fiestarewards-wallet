@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, Heading, Image, Link, Stack, Tag, Text } from "@chakra-ui/react"
+import { Box, Card, CardBody, Image, Text } from "@chakra-ui/react"
 type TirthCardProps = {
     image: string,
     imageDescription: string,
@@ -13,30 +13,31 @@ export const TirthCard = ({image, membershipNumber, pointsAvailable, contractedP
         direction={{ base: 'column', sm: 'row' }}
         overflow='hidden'
         variant='outline'
-        mt="16px"
-        bgImage={`url(${image})`}
-        bgPosition="center"
-        bgRepeat="no-repeat"
         >
-        <CardBody p="24px">
-            <Text fontSize='16px' color="#FFF" fontWeight="350">
-                No. de socio
+        <CardBody p={0}>
+        <Image src={image} alt='Dan Abramov'/>
+        <Box position="absolute" top="0" left="0" p="24px">
+            <Text fontSize={{base: '14px'}} color="#FFF" fontWeight="350">
+            No. de membresía
             </Text>
-            <Text fontSize='18px' color="#FFF" fontWeight="350" mb="32px">
+            <Text fontSize={{base: '14px'}} color="#FFF" fontWeight="350" mb="24px">
                 {membershipNumber}
             </Text>
-            <Text fontSize='16px' color="#FFF" fontWeight="350">
+            <Text fontSize={{base: '14px'}} color="#FFF" fontWeight="350">
                 Puntos disponibles
             </Text>
-            <Text fontSize='32px' color="#FFF" fontWeight="400" mb="32px">
+            <Text fontSize={{ base: '14px', md: '24px'}} color="#FFF" fontWeight="400" mb="24px">
                 {pointsAvailable}
             </Text>
-            <Text fontSize='16px' color="#FFF" fontWeight="350">
-                Puntos contratados
-            </Text>
-            <Text fontSize='32px' color="#FFF" fontWeight="400">
-                {contractedPoints}
-            </Text>
+            <Box display={ contractedPoints ? '' : 'none'}>
+                <Text fontSize={{base: '14px'}} color="#FFF" fontWeight="350">
+                    Puntos Vencidos
+                </Text>
+                <Text fontSize={{ base: '14px', md: '24px'}} color="#FFF" fontWeight="400">
+                    {contractedPoints}
+                </Text>
+            </Box>
+        </Box>
         </CardBody>
     </Card>
       )

@@ -16,6 +16,7 @@ export const HomePage = () => {
   const {isLogged, user} = useAuth();
   const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
   const [memberships, setMemberships] = useState<ResponseMemberships[]>([])
+  const [partnerPrograms, setPartnerPrograms] = useState([])
   useEffect(() => {
     fetch(' http://localhost:5000/promotions')
     .then(resp => {
@@ -35,6 +36,17 @@ export const HomePage = () => {
       setMemberships(data)
     })  
   }, [])
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/partnerPrograms?memberNumber=${user.memberNumber}`)
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      console.log(data[0].programs)
+      setPartnerPrograms(data[0].programs)
+    })  
+  }, [user])
   
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [modalPromo, setModalPromo] = useState<ResponsePromotion>();
@@ -67,31 +79,18 @@ export const HomePage = () => {
           </>
         }>
         <PrimarySlider slides={2}>
-          <SwiperSlide>
-            <TirthCard 
-              image='https://via.placeholder.com/600x365' 
-              imageDescription='Green double couch with wooden legs' 
-              membershipNumber='T-45561' 
-              pointsAvailable='33,000' 
-              contractedPoints='44,000'  />
-          </SwiperSlide>
-    
-          <SwiperSlide>
-            <TirthCard 
-              image='https://via.placeholder.com/600x365' 
-              imageDescription='Green double couch with wooden legs' 
-              membershipNumber='453453453453' 
-              pointsAvailable='220,000' 
-              contractedPoints='1,200,000' />
-          </SwiperSlide>
-          <SwiperSlide>
-            <TirthCard 
-              image='https://via.placeholder.com/600x365' 
-              imageDescription='Green double couch with wooden legs' 
-              membershipNumber='XER32423523' 
-              pointsAvailable='98,000' 
-              contractedPoints='123,000' />
-          </SwiperSlide>
+          {
+            partnerPrograms.map(({programImage, member }, i) => (
+              <SwiperSlide key={i}>
+                <TirthCard 
+                  image={programImage}
+                  imageDescription="Description"
+                  membershipNumber={member?.ownerNumber}
+                  pointsAvailable={member?.availablePoints}
+                  contractedPoints={member?.pointsHired}  />
+              </SwiperSlide>
+            ))
+          }
         </PrimarySlider>
       </PrimarySection>
 
