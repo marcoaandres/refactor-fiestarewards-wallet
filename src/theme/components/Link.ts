@@ -24,10 +24,30 @@ const underlineVariant = defineStyle({
     },
 })
 
+const sidebarVariant = defineStyle({
+  color:  "white", 
+  fontSize: "16px",
+  fontWeight: "350",
+  textDecoration: "none",
+  _hover: {
+    backgroundColor: "primary.100",
+    textDecoration: "none",
+  },
+    _active: {
+      backgroundColor: "primary.100",
+      textDecoration: "none",
+      _hover: {
+        backgroundColor: "primary.100",
+        textDecoration: "none",
+      },
+    },
+})
+
 
 export const linkTheme = defineStyleConfig({
   baseStyle,
   variants: {
     underline: underlineVariant,
+    sidebar: sidebarVariant
   }
 })

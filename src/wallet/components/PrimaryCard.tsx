@@ -21,6 +21,8 @@ export const PrimaryCard = ({ id, image, imageDescription, title, description, t
   return (
     <Card variant="primary" boxShadow='base' minH={'600px'}>
         <Image
+            maxW="100%"
+            maxH="185px"
             src={image}
             alt={imageDescription}
             borderRadius='sm'

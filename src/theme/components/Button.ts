@@ -37,8 +37,10 @@ const Button =  defineStyleConfig({
                 }
             },
         },
-        'ghost':{
+        'outline':{
             color: 'primary.10',
+            border: '1px',
+            borderColor: 'primary.10',
             _hover: {
                 bg: 'primary.50',
                 transition: '300ms',

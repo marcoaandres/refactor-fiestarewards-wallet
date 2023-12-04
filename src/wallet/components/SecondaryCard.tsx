@@ -26,6 +26,7 @@ export const SecondaryCard = ({id, image, imageDescription, title, description, 
     mt="16px"
     >
     <Image
+        maxW="400px"
         src={image}
         alt={imageDescription}
         borderRadius='sm'

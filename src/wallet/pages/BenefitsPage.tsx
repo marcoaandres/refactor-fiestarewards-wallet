@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Grid, GridItem, useDisclosure } from "@chakra-ui/react"
-import { SecondaryCard } from "../components"
+import { PrimarySection, SecondaryCard } from "../components"
 import { ResponsePromotion } from "../../interfaces/interfaces"
 import { PrimaryModal } from "../components/PrimaryModal"
 
@@ -28,11 +28,10 @@ export const BenefitsPage = () => {
 
   return (
     <>
-      <h1>Benefits</h1>
-      <Grid templateColumns='repeat(12, 1fr)' gap="4">
-        <GridItem colSpan={1}/>
-        <GridItem colSpan={10} my="16px">
-          {
+    <PrimarySection
+        title="Experiencias pensadas para ti"
+      >
+        {
             promotions.map(({idPromo, titulo, texto, terminos, producto, imagenSlider, url, textoBoton}) => (
               <SecondaryCard 
                   key={idPromo}
@@ -49,9 +48,7 @@ export const BenefitsPage = () => {
                 />
             ))
           }
-        </GridItem>
-        <GridItem colSpan={1}/>
-      </Grid>
+      </PrimarySection>
       {
         !!modalPromo && 
         <PrimaryModal 

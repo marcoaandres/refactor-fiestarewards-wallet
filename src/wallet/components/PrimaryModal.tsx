@@ -33,7 +33,7 @@ export const PrimaryModal = ({ isOpen, onClose, terminos, textoBoton, redirectTo
             {terminos}
           </ModalBody>
           <ModalFooter>
-            <Button variant='ghost' mr={3} onClick={onClose}>
+            <Button variant='secondary' mr={3} onClick={onClose}>
               Cerrar
             </Button>
             <Button variant='primary' onClick={handleRedirect}>{textoBoton}</Button>
