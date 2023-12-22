@@ -8,46 +8,33 @@ import BannerHome from '../../assets/img/banner_1.jpg'
 import { SwiperSlide } from 'swiper/react'
 import { TirthCard } from '../components/TirthCard'
 import { PrimaryModal } from '../components/PrimaryModal'
-import { ResponseMemberships, ResponsePartnerPrograms, ResponsePromotion } from '../../interfaces/interfaces'
+import { ResponsePartnerPrograms, ResponsePromotion } from '../../interfaces/interfaces'
 import { AuxCard } from '../components/AuxCard'
-import { useAppSelector } from '../../hooks'
+import { useAppSelector, usePromotionStore, useMembershipStore, usePartnerProgramStore  } from '../../hooks'
 
 export const HomePage = () => {
+  const { startLoadingPromotions } = usePromotionStore()
+  const { startLoadingMemberships } = useMembershipStore()
+  const { startLoadingPartnerPrograms } = usePartnerProgramStore()
+
   const { user, status } = useAppSelector(state => state.auth)
+  const { promotions } = useAppSelector(state => state.promotions)
+  const { memberships } = useAppSelector(state => state.memberships)
+  const {partnerPrograms} = useAppSelector(state => state.partnerPrograms)
+  
   const isLogged = (status === 'authenticated')
-  const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
-  const [memberships, setMemberships] = useState<ResponseMemberships[]>([])
-  const [partnerPrograms, setPartnerPrograms] = useState<ResponsePartnerPrograms[]>()
+
   useEffect(() => {
-    fetch(' http://localhost:5000/promotions')
-    .then(resp => {
-      return resp.json()
-    })
-    .then(data => {
-      setPromotions(data)
-    })  
+    startLoadingPromotions()
   }, [])
 
   useEffect(() => {
-    fetch(' http://localhost:5000/memberships')
-    .then(resp => {
-      return resp.json()
-    })
-    .then(data => {
-      setMemberships(data)
-    })  
+    startLoadingMemberships()
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:5000/partnerPrograms?memberNumber=${user?.memberNumber}`)
-    .then(resp => {
-      return resp.json()
-    })
-    .then(data => {
-      console.log(data[0].programs)
-      setPartnerPrograms(data[0].programs)
-    })  
-  }, [user])
+    startLoadingPartnerPrograms()
+  }, [isLogged])
   
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [modalPromo, setModalPromo] = useState<ResponsePromotion>();

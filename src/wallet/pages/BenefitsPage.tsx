@@ -3,18 +3,15 @@ import { Grid, GridItem, useDisclosure } from "@chakra-ui/react"
 import { PrimarySection, SecondaryCard } from "../components"
 import { ResponsePromotion } from "../../interfaces/interfaces"
 import { PrimaryModal } from "../components/PrimaryModal"
+import { useAppSelector, usePromotionStore } from "../../hooks"
 
 export const BenefitsPage = () => {
-  const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
+
+  const { startLoadingPromotions } = usePromotionStore()
+  const { promotions } = useAppSelector( state => state.promotions )
 
   useEffect(() => {
-    fetch(' http://localhost:5000/promotions')
-    .then(resp => {
-      return resp.json()
-    })
-    .then(data => {
-      setPromotions(data)
-    })  
+    startLoadingPromotions()
   }, [])
 
   const { isOpen, onOpen, onClose } = useDisclosure()

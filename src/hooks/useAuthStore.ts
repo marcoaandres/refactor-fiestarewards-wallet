@@ -1,7 +1,7 @@
 import { WalletApi } from '../api/WalletApi';
 import { User, UserLogin, UserRegister } from '../interfaces/interfaces';
 import { onChecking, onLogin, onLogout } from '../store';
-import { useAppDispatch, useAppSelector } from './useRedux';
+import { useAppDispatch, useAppSelector } from './';
 
 export const useAuthStore = () => {
 
@@ -67,18 +67,20 @@ export const useAuthStore = () => {
         dispatch( onLogout() )
     }
 
+    // revisamos si el token es valido o no
     const checkAuthToken = async() => {
+        // sí no existe deslogeamos al usuario
         const token = localStorage.getItem('token')
         if(!token) return dispatch( onLogout() )
 
+        // intentamos renovar nuestro token
         try {
             const {data} = await WalletApi.get('/auth/renew')
             localStorage.setItem('token', data.token)
-            dispatch( onLogin({ name: data.name, uid: data.uid }) )
+            dispatch( onLogin({ name: data.name, lastName: data.lastName, uid: data.uid, memberNumber: data.memberNumber }) )
 
         } catch (error) {
-            localStorage.clear()
-            dispatch( onLogout() )
+            startLogout()
         }
     }
 
@@ -94,6 +96,7 @@ export const useAuthStore = () => {
         // * metodos
         startLogin,
         startRegister,
-        startLogout
+        startLogout,
+        checkAuthToken
     }
 }

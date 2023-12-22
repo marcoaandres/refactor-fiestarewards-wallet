@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authSlice } from './auth/authSlice'
+import { authSlice, promotionSlice, membershipSlice, partnerProgramSlice } from './'
 
 export const store = configureStore({
   reducer: {
     // cada uno de nuestros reducer
     auth: authSlice.reducer,
-    
+    promotions: promotionSlice.reducer,
+    memberships: membershipSlice.reducer,  
+    partnerPrograms: partnerProgramSlice.reducer,  
   },
 })
 

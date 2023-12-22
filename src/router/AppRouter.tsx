@@ -4,8 +4,21 @@ import { AuthRoutes } from '../wallet/routes/AuthRoutes'
 import { WalletNavbar } from '../ui'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
+import { useAuthStore } from '../hooks'
+import { useEffect } from 'react'
  
 export const AppRouter = () => {
+
+  //* Validacion para saber si el usuario esta autenticado o no en base al jwt
+  const {checkAuthToken, status} = useAuthStore()
+
+  useEffect(() => {
+    checkAuthToken()
+  }, [])
+
+  if(status === 'checking')
+  return 'cargando...'
+
   return (
     <>
       <WalletNavbar/>
