@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Form, Formik } from 'formik'
 import { string, object, InferType } from 'yup'
 import { Box, Button, FormControl, FormErrorMessage, Grid, GridItem, Heading, Input, InputGroup, InputRightElement, Stack, useDisclosure } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { useAuth } from '../../hooks/useAuth'
 import { CustomAlert } from "../components/CustomAlert"
+import { useAuthStore } from "../../hooks"
 
 const initialValues = {
-  email: 'marco@andres.com',
-  password: 'tDhs40k7xV',
+  email: 'angelito@gmail.com',
+  password: '123456',
 }
 const loginSchema = object({
   email: string()
@@ -17,12 +16,13 @@ const loginSchema = object({
     .email('Introduzca un correo electrónico válido'),
   password: string()
     .required('Este campo es requerido')
-    .min(8, 'La contraseña debe tener una longitud mínima de 8 caracteres.'),
+    .min(6, 'La contraseña debe tener una longitud mínima de 8 caracteres.'),
 })
 
 type Login = InferType<typeof loginSchema>
 
 export const LoginPage = () => {
+  const { startLogin } = useAuthStore()
   const [titleAlert, setTitleAlert] = useState('')
   const {
     isOpen: isVisible,
@@ -31,50 +31,13 @@ export const LoginPage = () => {
   } = useDisclosure()
 
   const [show, setShow] = useState(false)
-  const navigate = useNavigate()
-  const { login } = useAuth()
 
   const onShowPasword = () => setShow(!show)
   
   const handlerLogin = ({email, password}: Login ) => {
-    fetch(`http://localhost:5000/users?email=${email}&pass=${password}`)
-    .then(response => {
-      if(!response.ok){
-        setTitleAlert("Algo salio mal, intentalo más tarde.")
-        onOpen()
-        throw new Error("Algo salio mal, intentalo más tarde.")
-      }      
-      return response.json()
-    })
-    .then(data => {
-      if(data.length === 0){
-        setTitleAlert("Upps... parece que tus datos son incorrectos.")
-        onOpen()
-        return
-      }
-
-      const {email, memberNumber, name, lastName } = data[0]
-      const user = {
-        email,
-        memberNumber,
-        name,
-        lastName
-      } 
-      const pathInls: string | null = localStorage.getItem('lastPath');
-      const lastPath: string = pathInls || '/' ;
-      login(user);
-
-      navigate(lastPath, {
-          replace: true
-      })
-
-    })
-    .catch((error) => {
-      setTitleAlert("Algo salio mal, intentalo más tarde.")
-      onOpen()
-      throw new Error(error)
-    })
+    startLogin({email, password})
   }
+
   return (
     <>
       <Formik

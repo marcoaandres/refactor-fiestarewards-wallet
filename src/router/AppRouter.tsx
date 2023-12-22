@@ -29,7 +29,7 @@ export const AppRouter = () => {
         }
         />
 
-        {/* RUTAS SOLO PARA USUARIOC AUTENTICADOS */}
+        {/* RUTAS SOLO PARA USUARIOS AUTENTICADOS */}
         <Route path='/*' element= {
           <PrivateRoute>
             <AuthRoutes/>

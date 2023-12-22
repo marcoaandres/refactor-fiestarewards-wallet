@@ -1,8 +1,20 @@
 
 
 export interface User{
-    email: string
+    uid: string
+    name: string,
+    lastName: string,
     memberNumber: string,
+    token: string
+}
+
+export interface UserLogin{
+    email: string,
+    password: string
+}
+export interface UserRegister{
+    email: string,
+    password: string,
     name: string,
     lastName: string
 }
@@ -12,6 +24,10 @@ export interface AuthState{
     user?: User
 }
 
+// export interface ErrorMessage{
+//     ok: boolean,
+//     msg: string
+// }
 export interface ResponsePromotion{
     idPromo: string,
     imagenSlider: string,

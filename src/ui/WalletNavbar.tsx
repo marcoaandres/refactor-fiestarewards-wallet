@@ -1,20 +1,17 @@
 import { useState } from 'react';
-import { Link as ReactLink, useNavigate } from 'react-router-dom'
+import { Link as ReactLink } from 'react-router-dom'
 import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButton, MenuItem, MenuList,  Stack, Text } from '@chakra-ui/react'
 import logoFr from "../assets/img/logo_FR.svg";
 import { ButtonToggle } from '../wallet/components/ButtonToggle';
-import { useAuth } from '../hooks/useAuth';
+import { useAppSelector, useAuthStore } from '../hooks';
 
 export const WalletNavbar = () => {
-    const { user, logout } = useAuth()
+    const { user, status } = useAppSelector(state => state.auth)
+    const { startLogout } = useAuthStore()
 
-    const navigate = useNavigate()
+
     const onLogout = (): void => {
-        logout()
-        localStorage.clear()
-        navigate('/', {
-            replace: true
-        })
+        startLogout()
     }
 
     const [isOpen, setIsOpen] = useState<boolean>(false)

@@ -1,17 +1,13 @@
-import { Navigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { Navigate } from 'react-router-dom'
+import { useAppSelector } from '../hooks'
 
 type PrivateRouteProps = {
   children: JSX.Element
 }
 
 export const PrivateRoute = ({children}: PrivateRouteProps) => {
-
-    const {isLogged} = useAuth()
-    const { pathname } = useLocation()
-    const lastPath = pathname
-
-    localStorage.setItem('lastPath', lastPath);
+    const { status } = useAppSelector(state => state.auth)
+    const isLogged = (status === 'authenticated')
 
   return (isLogged)
     ? children

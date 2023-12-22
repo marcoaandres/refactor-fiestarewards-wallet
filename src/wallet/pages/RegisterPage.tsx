@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Box, Button, FormControl, FormErrorMessage, Grid, GridItem, Heading, Input, InputGroup, InputRightElement, Stack, useDisclosure } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { useAuth } from '../../hooks/useAuth'
-import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../hooks'
 import { Form, Formik } from 'formik'
 import { string, object, ref, InferType } from 'yup'
 import { CustomAlert } from '../components/CustomAlert'
@@ -35,9 +34,8 @@ const initialValues = {
 
 type Register = InferType<typeof registerSchema>
 
-const createId = Date.now()
-
 export const RegisterPage = () => {
+  const { startRegister } = useAuthStore();
   const [titleAlert, setTitleAlert] = useState('')
   const {
     isOpen: isVisible,
@@ -49,65 +47,8 @@ export const RegisterPage = () => {
   const onShowPassword = () => setShowPassword(!showPassword)
   const onShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword)
 
-  const createMemberNumber = (number: number) => {
-    return String(number).slice(-7)
-  }
-
-  const { login } = useAuth()
-   const navigate = useNavigate()
-
-  const handleRegister = (values: Register) => {
-    const {
-      name,
-      lastName,
-      email,
-      password
-    } = values
-    const newUser = {
-      "id": createId,
-      name,
-      lastName,
-      email,
-      "memberNumber": createMemberNumber(createId),
-      "pass": password
-    }
-    fetch(' http://localhost:5000/users', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newUser)
-    })
-    .then(response => {
-      if(!response.ok){
-        setTitleAlert("Algo salio mal, intentalo más tarde.")
-        onOpen()
-        throw new Error("Algo salio mal, intentalo más tarde.")
-      }
-      return response.json()
-    })
-    .then(data => {
-      const {email, memberNumber, name, lastName } = data
-      const user = {
-        email,
-        memberNumber,
-        name,
-        lastName
-      } 
-      const pathInls: string | null = localStorage.getItem('lastPath')
-      const lastPath: string = pathInls || '/' 
-      login(user)
-
-      navigate(lastPath, {
-          replace: true
-      })
-
-    })
-    .catch((error) => {
-      setTitleAlert("Algo salio mal, intentalo más tarde.")
-      onOpen()
-      throw new Error(error)
-    })
+  const handleRegister = ({email, name, lastName, password}: Register) => {
+    startRegister({email, name, lastName, password})
   }
 
   return (

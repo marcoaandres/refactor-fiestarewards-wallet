@@ -7,13 +7,14 @@ import Home2  from '../../assets/img/home_2.jpg'
 import BannerHome from '../../assets/img/banner_1.jpg'
 import { SwiperSlide } from 'swiper/react'
 import { TirthCard } from '../components/TirthCard'
-import { useAuth } from '../../hooks/useAuth'
 import { PrimaryModal } from '../components/PrimaryModal'
 import { ResponseMemberships, ResponsePartnerPrograms, ResponsePromotion } from '../../interfaces/interfaces'
 import { AuxCard } from '../components/AuxCard'
+import { useAppSelector } from '../../hooks'
 
 export const HomePage = () => {
-  const {isLogged, user} = useAuth();
+  const { user, status } = useAppSelector(state => state.auth)
+  const isLogged = (status === 'authenticated')
   const [promotions, setPromotions] = useState<ResponsePromotion[]>([])
   const [memberships, setMemberships] = useState<ResponseMemberships[]>([])
   const [partnerPrograms, setPartnerPrograms] = useState<ResponsePartnerPrograms[]>()
