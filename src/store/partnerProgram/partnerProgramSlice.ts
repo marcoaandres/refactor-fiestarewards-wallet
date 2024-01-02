@@ -1,15 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ResponsePartnerPrograms } from '../../interfaces/interfaces';
+import { PartnerProgram } from '../../interfaces/interfaces';
 
-interface partnerProgram {
+interface PartnerPrograms {
     isLoadingPartnerPrograms: boolean,
-    partnerPrograms: ResponsePartnerPrograms[],
+    programs: PartnerProgram[],
 }
-const partnerProgramState: partnerProgram = {
+const partnerProgramState: PartnerPrograms = {
     isLoadingPartnerPrograms: false,
-    partnerPrograms: []
+    programs: []
 }
-
 
 export const partnerProgramSlice = createSlice({
     name: 'partnerProgram',
@@ -20,8 +19,12 @@ export const partnerProgramSlice = createSlice({
         },
         onSetPartnerPrograms: (state, {payload}) => {
             state.isLoadingPartnerPrograms = false
-            state.partnerPrograms = payload
+            state.programs = payload
         },
+        onLogoutPartnerPrograms: (state) => {
+            state.isLoadingPartnerPrograms = false,
+            state.programs = []
+        }
     }
 });
 
@@ -30,4 +33,5 @@ export const partnerProgramSlice = createSlice({
 export const { 
     onLoadPartnerPrograms,
     onSetPartnerPrograms,
+    onLogoutPartnerPrograms
  } = partnerProgramSlice.actions;

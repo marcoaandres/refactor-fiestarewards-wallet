@@ -1,8 +1,14 @@
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons"
-import { Box, Icon, Link, ListItem, Text, UnorderedList, Wrap, WrapItem} from "@chakra-ui/react"
 import { useState } from "react"
+import { Link as ReactLink } from "react-router-dom"
+import { Box, Link} from "@chakra-ui/react"
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons"
 
-export const WalletSidebar = () => {
+
+type props = {
+    programs: string[]
+}
+
+export const WalletSidebar = ({ programs }:props) => {
 
     const [showMenu, setShowMenu] = useState(false)
 
@@ -17,18 +23,14 @@ export const WalletSidebar = () => {
             </Box>
         </Box>
         <Box display={{  base:(showMenu ? 'initial' : 'none' ), md: "initial"}}>
-            <Box>
-                <Link p="16px 32px" display="block" variant="sidebar">One Hundred</Link>
-            </Box>
-            <Box>
-                <Link p="16px 32px" display="block" variant="sidebar">Live Aqua Residence Club</Link>
-            </Box>
-            <Box>
-                <Link p="16px 32px" display="block" variant="sidebar" bgColor="primary.100">Fiesta Rewards</Link>
-            </Box>
-            <Box>
-                <Link p="16px 32px" display="block" variant="sidebar">Fiesta Rewards Apreciare</Link>
-            </Box>
+            {
+                programs.map((program)=> (
+                    <Box key={program}>
+                        <Link as={ReactLink} to={`/my-memberships?program=${program}`} p="16px 32px" display="block" variant="sidebar">{program === 'FR' ? 'Fiesta Rewards' : 'Apreciare'}</Link>
+                    </Box>
+                ))
+            }
+            
         </Box>
     </Box>
   )

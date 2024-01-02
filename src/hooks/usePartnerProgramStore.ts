@@ -3,7 +3,7 @@ import { onLoadPartnerPrograms, onSetPartnerPrograms } from "../store"
 import { useAppDispatch, useAppSelector } from "./"
 
 export const usePartnerProgramStore = () => {
-    const {isLoadingPartnerPrograms, partnerProgram} = useAppSelector(state => state.partnerPrograms)
+    const {isLoadingPartnerPrograms, programs} = useAppSelector(state => state.partnerPrograms)
     const { user } = useAppSelector( state => state.auth )
     const dispatch = useAppDispatch()
 
@@ -19,9 +19,9 @@ export const usePartnerProgramStore = () => {
     return{
         // * propiedades
         isLoadingPartnerPrograms,
-        partnerProgram,
+        programs,
 
         // * metodos
-        startLoadingPartnerPrograms,
+        startLoadingPartnerPrograms
     }
 }

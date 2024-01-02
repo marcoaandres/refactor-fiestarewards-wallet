@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
 import { Link as ReactLink } from 'react-router-dom'
-import { Button, Flex, Text, useDisclosure } from '@chakra-ui/react'
+import { Button, Flex, useDisclosure } from '@chakra-ui/react'
 import { PrimaryBanner, PrimarySlider, PrimarySection, SectionWithImage, PrimaryCard } from '../components'
 import Home1  from '../../assets/img/home_1.jpg'
 import Home2  from '../../assets/img/home_2.jpg'
 import BannerHome from '../../assets/img/banner_1.jpg'
 import { SwiperSlide } from 'swiper/react'
-import { TirthCard } from '../components/TirthCard'
 import { PrimaryModal } from '../components/PrimaryModal'
-import { ResponsePartnerPrograms, ResponsePromotion } from '../../interfaces/interfaces'
+import {  Promotion } from '../../interfaces/interfaces'
 import { AuxCard } from '../components/AuxCard'
-import { useAppSelector, usePromotionStore, useMembershipStore, usePartnerProgramStore  } from '../../hooks'
+import { useAppSelector, usePromotionStore, useMembershipStore  } from '../../hooks'
+import { UserMembershipSection } from '../components/UserMembershipSection'
 
 export const HomePage = () => {
   const { startLoadingPromotions } = usePromotionStore()
   const { startLoadingMemberships } = useMembershipStore()
-  const { startLoadingPartnerPrograms } = usePartnerProgramStore()
 
-  const { user, status } = useAppSelector(state => state.auth)
+
+  const { status } = useAppSelector(state => state.auth)
   const { promotions } = useAppSelector(state => state.promotions)
   const { memberships } = useAppSelector(state => state.memberships)
-  const {partnerPrograms} = useAppSelector(state => state.partnerPrograms)
+  
   
   const isLogged = (status === 'authenticated')
 
@@ -32,12 +32,9 @@ export const HomePage = () => {
     startLoadingMemberships()
   }, [])
 
-  useEffect(() => {
-    startLoadingPartnerPrograms()
-  }, [isLogged])
   
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [modalPromo, setModalPromo] = useState<ResponsePromotion>();
+  const [modalPromo, setModalPromo] = useState<Promotion>();
 
   const showModalPromotion = (id: string) => {
     const promo = promotions.find(({idPromo}) => idPromo == id)
@@ -52,42 +49,19 @@ export const HomePage = () => {
         title="Fiesta Rewards Wallet"
         imageDescription="Descipción de imagen"
         image={BannerHome}
-        child={<Button display={{base: 'none', md:'block'}}>Conocer más</Button>}
+        child={<Button as={ReactLink} to="/login" display={{base: 'none', md:'block'}}>Conocer más</Button>}
       />
       }
       {
-        (isLogged && partnerPrograms) &&
-        <PrimarySection
-        title={`Hola, ${user?.name} ${user?.lastName}`}
-        subtitle="Estas son tus membresías. Para ver más información, haz clic sobre la tarjeta."
-        node={
-          <>
-            <Text fontSize='base' fontWeight='300' lineHeight='base' color='primary.10'>Si no ubicas alguna de tus membresías comunícate a la Línea Fiesta Rewards  (*8585).</Text>
-            <Flex justifyContent="right" mt="36px"><Button as={ReactLink} to='/'>Ver todos</Button></Flex>
-          </>
-        }>
-        <PrimarySlider slides={2}>
-          {
-            partnerPrograms.map(({programImage, member }, i)  => (
-              <SwiperSlide key={i}>
-                <TirthCard 
-                  image={programImage}
-                  imageDescription="Description"
-                  membershipNumber={member.ownerNumber}
-                  pointsAvailable={member.availablePoints}  />
-              </SwiperSlide>
-            ))
-          }
-        </PrimarySlider>
-      </PrimarySection>
-
+        isLogged &&
+        <UserMembershipSection />
       }
       
       
       <PrimarySection
         title="Promociones especiales para ti"
         subtitle="Desliza y descubre todas las opciones."
-        node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} to='/benefits'>Ver todos</Button></Flex>}
+        node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to='/benefits'>Ver todos</Button></Flex>}
       >
         <PrimarySlider>
           {

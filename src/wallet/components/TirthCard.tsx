@@ -12,9 +12,10 @@ export const TirthCard = ({image, membershipNumber, pointsAvailable}: TirthCardP
         direction={{ base: 'column', sm: 'row' }}
         overflow='hidden'
         variant='outline'
+        borderColor="transparent"
         >
-        <CardBody p={0}>
-        <Image src={image} alt='Dan Abramov'/>
+        <CardBody p={0} borderRadius="lg">
+        <Image src={image} alt='' borderRadius="lg" />
         <Box position="absolute" top="0" left="0" p="24px">
             <Text fontSize={{base: '14px'}} color="#FFF" fontWeight="350">
             No. de membresía

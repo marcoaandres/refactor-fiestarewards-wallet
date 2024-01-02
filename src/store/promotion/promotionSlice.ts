@@ -1,10 +1,10 @@
 
 import { createSlice } from '@reduxjs/toolkit';
-import { ResponsePromotion } from '../../interfaces/interfaces';
+import { Promotion } from '../../interfaces/interfaces';
 
 interface promotion {
     isLoadingPromotions: boolean,
-    promotions: ResponsePromotion[],
+    promotions: Promotion[],
 }
 const promotionState: promotion = {
     isLoadingPromotions: false,

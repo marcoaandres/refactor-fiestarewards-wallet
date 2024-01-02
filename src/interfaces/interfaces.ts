@@ -24,41 +24,122 @@ export interface AuthState{
     user?: User
 }
 
-// export interface ErrorMessage{
-//     ok: boolean,
-//     msg: string
-// }
-export interface ResponsePromotion{
-    idPromo: string,
-    imagenSlider: string,
-    titulo: string,
-    texto: string,
-    terminos: string,
-    producto: string,
-    textoBoton: string,
-    url: string,
+// general promotions
+export interface Promotion {
+    idPromo:              string;
+    prioridad:            number;
+    producto:             string;
+    tipo:                 string;
+    titulo:               string;
+    tituloEn:             string;
+    texto:                string;
+    textoEn:              string;
+    textoBoton:           string;
+    textoBotonEn:         string;
+    urlTerminos:          string;
+    urlTerminosEn:        string;
+    terminos:             string;
+    terminosEn:           string;
+    hoteles?:              Hotel[];
+    imagenSlider:         string;
+    imagenSliderEn:       string;
+    imagenBannerDesk:     string;
+    imagenBannerDeskEn:   string;
+    imagenBannerMobile:   string;
+    imagenBannerMobileEn: string;
+    url:                  string;
+    urlEn:                string;
+    promocode:            string;
+    id:                   string;
+    fechaInicio?:         Date;
+    fechaFin?:            Date;
 }
 
-export interface ResponseMemberships{
-    desktopImage: string,
-    nameMembership: string,
-    titleBenefits: string,
-    benefits: string[],
-    buttonText: string,
-    url: string,
+export interface Hotel {
+    codigo: string;
+    marca:  string;
+    nombre: string;
 }
 
-export interface memberInfo{
-    ownerNumber : string,
-    availablePoints : string,
-    level : string,
-    nextLevel : string,
-    pointsNextLevel : string
+// membership promotions
+export interface Membership {
+    benefits:         string[];
+    position:         number;
+    nameMembership:   string;
+    nameMembershipEn: string;
+    titleBenefits:    string;
+    titleBenefitsEn:  string;
+    benefitOneEn:     string;
+    benefitTwoEn:     string;
+    benefitThreeEn:   string;
+    benefitFourEn:    string;
+    benefitFiveEn:    string;
+    buttonText:       string;
+    buttonTextEn:     string;
+    desktopImage:     string;
+    desktopImageEn:   string;
+    mobileImage:      string;
+    mobileImageEn:    string;
+    emailDirection:   string;
+    url:              string;
+    id:               string;
 }
 
-export interface ResponsePartnerPrograms{
-    program: string,
-    programImage: string,
-    member: memberInfo
+// partnerProgram
+export interface PartnerProgram {
+    program:           string;
+    programImage:      string;
+    member:            Member;
+    informationPoints: InformationPoints;
+    Redemtions?:       Redemtion[];
+    accreditations?:   Accreditation[];
+    certificates?:     Certificate[];
+    lastReservation?:  LastReservation[];
+}
+
+export interface Accreditation {
+    concept:     string;
+    processDate: string;
+    points:      string;
+}
+export interface Redemtion {
+    concept:     string;
+    processDate: string;
+    points:      string;
+}
+
+export interface Certificate {
+    description: string;
+    number:      string;
+    expiration:  string;
+    memberType:  string;
+}
+
+export interface InformationPoints {
+    pointsExpiryNextMonth:  number;
+    pointsExpiryNextMonth2: number;
+    pointsExpiryNextMonth3: number;
+}
+
+export interface LastReservation {
+    hotelName:       string;
+    reservationCode: string;
+    reservationDate: Date;
+    checkIn:         Date;
+    checkOut:        Date;
+    currency:        string;
+    usedPoints:      string;
+    cashMount:       string;
+    programaReserva: string;
+}
+
+export interface Member {
+    ownerNumber:      string;
+    availablePoints:  string;
+    level:           string;
+    pointsNextLevel?: string;
+    nextLevel?:       string;
+    pointsOverdue:    string;
+    antiguedad:       string;
 }
 

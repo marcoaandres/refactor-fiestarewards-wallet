@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image } from "@chakra-ui/react"
+import { Box, Flex, Grid, GridItem, Heading, Image } from "@chakra-ui/react"
 
 type SectionWithImageProps = {
   title: string,
@@ -15,22 +15,21 @@ export const SectionWithImage = ({title, subtitle, picture, background, child, r
       md: 'column',
       xl: 'row'
     }}>
-      <Box w={['100%', '100%', '50%']} order={ revert ? 2 : 1}>
+      <Box w={{base:'100%', "md": '100%', "xl": '50%'}} order={ revert ? 2 : 1}>
             <Image src={picture}/>
         </Box>
-        <Box  w={['100%', '100%', '50%']} order={ revert ? 1 : 2}>
-            <Flex alignItems='center' justifyContent='center'>
-              <Box w={['100%', '70%' ]}
-              p={{
-                base: '64px 24px',
-                md: '0'
-              }}  
-                >
-                <Heading size="title" mb="24px">{title}</Heading>
-                <Heading size="subtitle">{subtitle}</Heading>
-                {child}
-              </Box>
-            </Flex>
+        <Box  w={{base:'100%', "md": '100%', "xl": '50%'}} order={ revert ? 1 : 2}>
+          <Grid templateColumns='repeat(12, 1fr)' gap="4">
+              <GridItem colSpan={{base:1, xl:2}}/>
+              <GridItem colSpan={{base:10, xl:8}}>
+                  <Box my="56px">
+                      <Heading size="title">{title}</Heading>
+                      <Heading size="subtitle">{subtitle}</Heading>
+                      {child}
+                  </Box>
+              </GridItem>
+              <GridItem colSpan={{base:1, xl:2}}/>
+          </Grid>
         </Box>
         
     </Flex>

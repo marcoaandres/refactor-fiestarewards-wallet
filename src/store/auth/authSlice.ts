@@ -9,7 +9,7 @@ interface authState {
   }
 
   const initialState: authState = {
-    status: 'not-authenticated',
+    status: 'checking',
     user: undefined,
     errorMessage: undefined,
 }

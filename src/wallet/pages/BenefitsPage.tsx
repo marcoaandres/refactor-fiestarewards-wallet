@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { Grid, GridItem, useDisclosure } from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/react"
 import { PrimarySection, SecondaryCard } from "../components"
-import { ResponsePromotion } from "../../interfaces/interfaces"
+import { Promotion } from "../../interfaces/interfaces"
 import { PrimaryModal } from "../components/PrimaryModal"
 import { useAppSelector, usePromotionStore } from "../../hooks"
 
@@ -15,7 +15,7 @@ export const BenefitsPage = () => {
   }, [])
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [modalPromo, setModalPromo] = useState<ResponsePromotion>();
+  const [modalPromo, setModalPromo] = useState<Promotion>();
 
   const showModalPromotion = (id: string) => {
     const promo = promotions.find(({idPromo}) => idPromo == id)

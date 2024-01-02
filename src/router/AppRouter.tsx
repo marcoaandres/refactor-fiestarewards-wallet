@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { BenefitsPage, HomePage, LoginPage, RegisterPage } from '../wallet/pages'
 import { AuthRoutes } from '../wallet/routes/AuthRoutes'
@@ -5,7 +6,6 @@ import { WalletNavbar } from '../ui'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
 import { useAuthStore } from '../hooks'
-import { useEffect } from 'react'
  
 export const AppRouter = () => {
 

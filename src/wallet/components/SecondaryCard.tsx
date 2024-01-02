@@ -20,13 +20,13 @@ export const SecondaryCard = ({id, image, imageDescription, title, description, 
     }
   return (
     <Card
-    direction={{ base: 'column', sm: 'row' }}
+    direction={{ base: 'column', lg: 'row' }}
     overflow='hidden'
     variant='outline'
     mt="16px"
     >
     <Image
-        maxW="400px"
+        maxW={{lg: "400px"}}
         src={image}
         alt={imageDescription}
         borderRadius='sm'

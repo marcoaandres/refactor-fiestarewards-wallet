@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ResponseMemberships } from '../../interfaces/interfaces';
+import { Membership, } from '../../interfaces/interfaces';
 
-interface membership {
+interface Memberships {
     isLoadingMemberships: boolean,
-    memberships: ResponseMemberships[],
+    memberships: Membership[],
 }
 
-const membershipState: membership = {
+const membershipState: Memberships = {
     isLoadingMemberships: false,
     memberships: []
 }
