@@ -6,6 +6,7 @@ import { useAppSelector, usePartnerProgramStore } from "../../hooks"
 import { PrimarySection } from "../components"
 import { WalletSidebar } from "../../ui"
 import { MembershipDetailSectionLoader } from "../components/MembershipDetailSectionLoader"
+import {formatDate, formatNumbers, getPorcentProgress} from "../../helpers/helpers"
 
 export const MembershipDetails = () => {
 
@@ -65,10 +66,10 @@ export const MembershipDetails = () => {
                 <GridItem colSpan={{ base:12, md:6, lg:5}}>
                         <Box my="32px">
                           <Text fontSize="20px" color="neutral.10" fontWeight="350">Puntos disponibles</Text>
-                            <Text fontSize="48px" color="primary.10" fontWeight="400">{program?.member.availablePoints}</Text>  
+                            <Text fontSize="48px" color="primary.10" fontWeight="400">{formatNumbers(program?.member.availablePoints ? program?.member.availablePoints : '0')}</Text>  
                           <Box display={program?.member.pointsNextLevel ? 'block': 'none'}>
-                            <Progress value={50} borderRadius="50px" my="16px" />
-                            <Text fontSize="16px" color="neutral.10" fontWeight="325">{program?.member.pointsNextLevel} puntos necesarios para ascender a membresía FR {program?.member.nextLevel}</Text>
+                            <Progress value={program?.member.availablePoints && program?.member.pointsNextLevel ? getPorcentProgress(program?.member.availablePoints, program?.member.pointsNextLevel) : 0} borderRadius="50px" my="16px" />
+                            <Text fontSize="16px" color="neutral.10" fontWeight="325">{formatNumbers(program?.member.pointsNextLevel ? program?.member.pointsNextLevel : '0')} puntos necesarios para ascender a membresía FR {program?.member.nextLevel}</Text>
                           </Box>
                         </Box>                       
                 </GridItem>
@@ -108,9 +109,9 @@ export const MembershipDetails = () => {
                           <Box boxShadow='base' p="24px 32px" mb="16px" key={`redemtion-${i}`}>
                             <Text color="primary.10" fontWeight="350" fontSize="20px">{el.concept}</Text>
                             <Flex mt="8px">
-                              <Text color="neutral.10" fontWeight="300" fontSize="16px">{el.processDate}</Text>
+                              <Text color="neutral.10" fontWeight="300" fontSize="16px">{formatDate(el.processDate)}</Text>
                               <Spacer/>
-                              <Text color="primary.20" fontWeight="350" fontSize="16px">{el.points}&nbsp;pts</Text>
+                              <Text color="primary.20" fontWeight="350" fontSize="16px">{formatNumbers(el ? el.points : '0' )}&nbsp;pts</Text>
                             </Flex>
                           </Box>
                         ))
@@ -128,9 +129,9 @@ export const MembershipDetails = () => {
                           <Box key={`accreditation-${i}`} boxShadow='base' p="24px 32px" mb="16px">
                             <Text color="primary.10" fontWeight="350" fontSize="20px">{el.concept}</Text>
                             <Flex mt="8px">
-                              <Text color="neutral.10" fontWeight="300" fontSize="16px">{el.processDate}</Text>
+                              <Text color="neutral.10" fontWeight="300" fontSize="16px">{formatDate(el.processDate)}</Text>
                               <Spacer/>
-                              <Text color="primary.20" fontWeight="350" fontSize="16px">{el.points}&nbsp;pts</Text>
+                              <Text color="primary.20" fontWeight="350" fontSize="16px">{formatNumbers(el ? el.points : '0' )}&nbsp;pts</Text>
                             </Flex>
                           </Box>
                         ))

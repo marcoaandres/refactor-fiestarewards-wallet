@@ -1,4 +1,5 @@
 import { Box, Card, CardBody, Image, Text } from "@chakra-ui/react"
+import {formatNumbers} from "../../helpers/helpers"
 type TirthCardProps = {
     image: string,
     imageDescription: string,
@@ -27,7 +28,7 @@ export const TirthCard = ({image, membershipNumber, pointsAvailable}: TirthCardP
                 Puntos disponibles
             </Text>
             <Text fontSize={{ base: '14px', md: '24px'}} color="#FFF" fontWeight="400" mb="24px">
-                {pointsAvailable}
+                {formatNumbers(pointsAvailable)}
             </Text>
         </Box>
         </CardBody>
