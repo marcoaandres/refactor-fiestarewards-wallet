@@ -18,8 +18,8 @@ export const AuxCard = ({image, imageDescription, title, subtitle, benefits, tex
             borderRadius='sm'
         />
         <CardBody mt='1'>
-            <Heading fontSize='md' mb="16px" color="primary.10">{title}</Heading>
-            <Text fontSize='sm' fontWeight="300" mb="16px" color="primary.20" noOfLines={2}>
+            <Heading as="h3" fontSize='md' mb="16px" color="primary.10">{title}</Heading>
+            <Text as="h4" fontSize='sm' fontWeight="300" mb="16px" color="primary.20" noOfLines={2}>
                 {subtitle}
             </Text>
             <UnorderedList>

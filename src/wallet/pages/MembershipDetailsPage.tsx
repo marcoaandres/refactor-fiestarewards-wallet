@@ -5,6 +5,7 @@ import { ChevronLeftIcon, QuestionOutlineIcon } from "@chakra-ui/icons"
 import { useAppSelector, usePartnerProgramStore } from "../../hooks"
 import { PrimarySection } from "../components"
 import { WalletSidebar } from "../../ui"
+import { MembershipDetailSectionLoader } from "../components/MembershipDetailSectionLoader"
 
 export const MembershipDetails = () => {
 
@@ -22,7 +23,7 @@ export const MembershipDetails = () => {
 
   {
     if(isLoadingPartnerPrograms)
-    return 'cargando...'
+    return <MembershipDetailSectionLoader/>
      return (
     
       <>
@@ -66,7 +67,7 @@ export const MembershipDetails = () => {
                           <Text fontSize="20px" color="neutral.10" fontWeight="350">Puntos disponibles</Text>
                             <Text fontSize="48px" color="primary.10" fontWeight="400">{program?.member.availablePoints}</Text>  
                           <Box display={program?.member.pointsNextLevel ? 'block': 'none'}>
-                            <Progress value={80} borderRadius="50px" my="16px" />
+                            <Progress value={50} borderRadius="50px" my="16px" />
                             <Text fontSize="16px" color="neutral.10" fontWeight="325">{program?.member.pointsNextLevel} puntos necesarios para ascender a membresía FR {program?.member.nextLevel}</Text>
                           </Box>
                         </Box>                       

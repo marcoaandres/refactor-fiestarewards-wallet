@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react"
-import { useDisclosure } from "@chakra-ui/react"
-import { PrimarySection, SecondaryCard } from "../components"
-import { Promotion } from "../../interfaces/interfaces"
-import { PrimaryModal } from "../components/PrimaryModal"
+import { Box, useDisclosure } from "@chakra-ui/react"
 import { useAppSelector, usePromotionStore } from "../../hooks"
+import { Promotion } from "../../interfaces/interfaces"
+import { BenefitSectionLoader, PrimarySection, SecondaryCard, PrimaryModal } from "../components"
 
 export const BenefitsPage = () => {
 
   const { startLoadingPromotions } = usePromotionStore()
-  const { promotions } = useAppSelector( state => state.promotions )
+  const { promotions, isLoadingPromotions } = useAppSelector( state => state.promotions )
 
   useEffect(() => {
     startLoadingPromotions()
@@ -23,8 +22,11 @@ export const BenefitsPage = () => {
     onOpen()
   }
 
+  if(isLoadingPromotions)
+    return <BenefitSectionLoader/>
+
   return (
-    <>
+    <Box mb="32px" >
     <PrimarySection
         title="Experiencias pensadas para ti"
       >
@@ -56,6 +58,6 @@ export const BenefitsPage = () => {
           redirectTo={modalPromo.url}
         />
       }
-    </>
+    </Box>
   )
 }

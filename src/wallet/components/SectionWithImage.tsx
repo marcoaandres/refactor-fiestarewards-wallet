@@ -23,8 +23,8 @@ export const SectionWithImage = ({title, subtitle, picture, background, child, r
               <GridItem colSpan={{base:1, xl:2}}/>
               <GridItem colSpan={{base:10, xl:8}}>
                   <Box my="56px">
-                      <Heading size="title">{title}</Heading>
-                      <Heading size="subtitle">{subtitle}</Heading>
+                      <Heading as="h2" size={{base:"title-base", md:"title"}}>{title}</Heading>
+                      <Heading as="p" size={{base:"subtitle-base", md:"subtitle"}}>{subtitle}</Heading>
                       {child}
                   </Box>
               </GridItem>

@@ -28,7 +28,7 @@ export const PrimaryCard = ({ id, image, imageDescription, title, description, t
             borderRadius='sm'
         />
         <CardBody mt='1'>
-            <Heading fontSize='md' mb="16px">{title}</Heading>
+            <Heading fontSize='md' mb="16px" as="h3">{title}</Heading>
             <Text fontSize='sm' fontWeight="300" mb="16px" noOfLines={2}>
                 {description}
             </Text>

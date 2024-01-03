@@ -33,7 +33,7 @@ export const SecondaryCard = ({id, image, imageDescription, title, description, 
     />
     <Stack mt='1' spacing='3'>
         <CardBody px="32px" py="16px">
-            <Heading fontSize='md' noOfLines={2}>{title}</Heading>
+            <Heading as="h3" fontSize='md' noOfLines={2}>{title}</Heading>
             <Text fontSize='sm' fontWeight="300" my="16px" noOfLines={2}>
             {description}
             </Text>

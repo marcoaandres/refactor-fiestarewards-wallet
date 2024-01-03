@@ -15,6 +15,18 @@ const Headings = defineStyleConfig({
             lineHeight: 'base',
             color: 'neutral.10',
         },
+        'title-base':{
+            fontSize: '2xl',
+            fontWeight: '500',
+            lineHeight: 'base',
+            color: 'primary.10',
+        },
+        'subtitle-base': {
+            fontSize: 'md',
+            fontWeight: '350',
+            lineHeight: 'base',
+            color: 'neutral.10',
+        },
 
     }
 })

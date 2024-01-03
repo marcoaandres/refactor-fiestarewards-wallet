@@ -5,6 +5,7 @@ import Heading from './components/Heading'
 import {settings} from './settings'
 import {linkTheme} from './components/Link'
 import tagTheme from './components/Tag'
+import { inputTheme } from './components/Input'
 
 const theme = extendTheme({
     ...settings,
@@ -17,7 +18,8 @@ const theme = extendTheme({
         Heading,
         Card: cardTheme,
         Link: linkTheme,
-        Tag: tagTheme
+        Tag: tagTheme,
+        Input: inputTheme
     },
 })
 

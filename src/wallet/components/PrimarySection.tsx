@@ -13,8 +13,8 @@ export const PrimarySection = ( {title, children, node, subtitle}: PrimarySectio
         <GridItem colSpan={1}/>
         <GridItem colSpan={10}>
             <Box mt="56px" mb="36px">
-                <Heading size="title">{title}</Heading>
-                <Heading size="subtitle">{subtitle}</Heading>
+                <Heading as="h2" size={{base:"title-base", md:"title"}}>{title}</Heading>
+                <Heading as="p" size={{base:"subtitle-base", md:"subtitle"}}>{subtitle}</Heading>
                 {node}
             </Box>
             {children}

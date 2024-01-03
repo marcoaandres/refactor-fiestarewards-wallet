@@ -7,6 +7,7 @@ import { useAppSelector, useAuthStore } from '../hooks';
 
 export const WalletNavbar = () => {
     const { user, status } = useAppSelector(state => state.auth)
+    const { programs } = useAppSelector(state => state.partnerPrograms)
     const { startLogout } = useAuthStore()
 
 
@@ -86,7 +87,7 @@ export const WalletNavbar = () => {
                     }}
                 >
                     <Link as={ReactLink} to='/' px='12px' py='16px' variant='underline'>Home</Link>
-                    <Link as={ReactLink} to='/my-memberships' display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline'>My Memberships</Link>
+                    <Link as={ReactLink} to={`/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline'>My Memberships</Link>
                     <Link as={ReactLink} to='/benefits' px='12px' py='16px' variant='underline'>Benefits</Link>
                     <Link px='12px' py='16px' variant='underline'  onClick={onLogout}  display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}>Logout</Link>
                 </Stack>
