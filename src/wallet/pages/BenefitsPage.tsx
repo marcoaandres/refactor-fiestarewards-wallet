@@ -3,6 +3,7 @@ import { Box, useDisclosure } from "@chakra-ui/react"
 import { useAppSelector, usePromotionStore } from "../../hooks"
 import { Promotion } from "../../interfaces/interfaces"
 import { BenefitSectionLoader, PrimarySection, SecondaryCard, PrimaryModal } from "../components"
+import { useTranslation } from "react-i18next"
 
 export const BenefitsPage = () => {
 
@@ -21,14 +22,14 @@ export const BenefitsPage = () => {
     setModalPromo(promo)
     onOpen()
   }
-
+  const {t} = useTranslation() 
   if(isLoadingPromotions)
     return <BenefitSectionLoader/>
 
   return (
     <Box mb="32px" >
     <PrimarySection
-        title="Experiencias pensadas para ti"
+        title={ t('benefits.title') }
       >
         {
             promotions.map(({idPromo, titulo, texto, terminos, producto, imagenSlider, url, textoBoton}) => (

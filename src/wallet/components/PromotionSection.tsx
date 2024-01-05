@@ -5,6 +5,7 @@ import { SwiperSlide } from "swiper/react"
 import { useAppSelector, usePromotionStore } from "../../hooks"
 import { Promotion } from "../../interfaces/interfaces"
 import { SectionLoader, PrimaryModal, PrimaryCard, PrimarySection, PrimarySlider } from "./"
+import { useTranslation } from "react-i18next"
 
 export const PromotionSection = () => {
 
@@ -23,15 +24,18 @@ export const PromotionSection = () => {
         setModalPromo(promo)
         onOpen()
     }
+
+    const {t} = useTranslation()
+
     if(isLoadingPromotions)
     return <SectionLoader/>
 
   return (
     <>
         <PrimarySection
-            title="Promociones especiales para ti"
-            subtitle="Desliza y descubre todas las opciones."
-            node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to='/benefits'>Ver todos</Button></Flex>}
+            title={ t('home.promotionSection.title') }
+            subtitle={ t('home.promotionSection.subtitle') }
+            node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to='/benefits'>{ t('home.promotionSection.button') }</Button></Flex>}
           >
             <PrimarySlider>
               {

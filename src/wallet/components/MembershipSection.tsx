@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { SwiperSlide } from 'swiper/react'
 import { useAppSelector, useMembershipStore } from '../../hooks'
 import { AuxCard,PrimarySection, PrimarySlider, SectionLoader } from './'
+import { useTranslation } from 'react-i18next'
 
 export const MembershipSection = () => {
 
@@ -11,13 +12,15 @@ export const MembershipSection = () => {
         startLoadingMemberships()
     }, [])
 
+    const {t} = useTranslation()
+
     if(isLoadingMemberships)
     return <SectionLoader/>
   return (
     
     <PrimarySection
-        title="Nuestras membresías"
-        subtitle="Asómbrate con todo lo que tenemos para ti."
+        title={ t('home.membershipPromotionSection.title') }
+        subtitle={ t('home.membershipPromotionSection.subtitle') }
       >
         <PrimarySlider>
           {

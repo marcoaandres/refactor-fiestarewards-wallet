@@ -7,6 +7,7 @@ import { PrimarySection } from "../components"
 import { WalletSidebar } from "../../ui"
 import { MembershipDetailSectionLoader } from "../components/MembershipDetailSectionLoader"
 import {formatDate, formatNumbers, getPorcentProgress} from "../../helpers/helpers"
+import { useTranslation } from "react-i18next"
 
 export const MembershipDetails = () => {
 
@@ -22,6 +23,7 @@ export const MembershipDetails = () => {
   const program = useMemo(() => programs.find((el) => ( el.program === queryProgram )), [queryProgram, programs])
   const sideBarPrograms = programs.map((el) => ( el.program ))
 
+  const {t} = useTranslation()
   {
     if(isLoadingPartnerPrograms)
     return <MembershipDetailSectionLoader/>
@@ -34,7 +36,7 @@ export const MembershipDetails = () => {
           </GridItem>
           <GridItem colSpan={{base: 12, md: 9, lg: 10}} mt={{ base: "120px", md: "0" }}>
   
-            <PrimarySection title="Mis membresías"
+            <PrimarySection title={ t('myMemberships.mainSection.title') }
               node={
                 <Flex mt="8px">
                   <Button as={ReactLink} 
@@ -45,12 +47,12 @@ export const MembershipDetails = () => {
                   fontWeight="350" 
                   color="primary.10" 
                   mt="16px">
-                        Inicio
+                        { t('myMemberships.mainSection.button') }
                   </Button>
                   <Spacer/>
                   <Text fontSize="16px" fontWeight="300" align="right" mt="16px">
                         <QuestionOutlineIcon boxSize={3} mr="8px"/> 
-                        La información mostrada puede tardar hasta 24 horas en actualizarse.
+                        { t('myMemberships.mainSection.textInfo') }
                   </Text>
                 </Flex>
               }
@@ -65,11 +67,11 @@ export const MembershipDetails = () => {
                 <GridItem colSpan={{ base:12, md: 1, lg:2}}/>
                 <GridItem colSpan={{ base:12, md:6, lg:5}}>
                         <Box my="32px">
-                          <Text fontSize="20px" color="neutral.10" fontWeight="350">Puntos disponibles</Text>
+                          <Text fontSize="20px" color="neutral.10" fontWeight="350">{ t('myMemberships.cardInfoSection.availablePoints') }</Text>
                             <Text fontSize="48px" color="primary.10" fontWeight="400">{formatNumbers(program?.member.availablePoints ? program?.member.availablePoints : '0')}</Text>  
                           <Box display={program?.member.pointsNextLevel ? 'block': 'none'}>
                             <Progress value={program?.member.availablePoints && program?.member.pointsNextLevel ? getPorcentProgress(program?.member.availablePoints, program?.member.pointsNextLevel) : 0} borderRadius="50px" my="16px" />
-                            <Text fontSize="16px" color="neutral.10" fontWeight="325">{formatNumbers(program?.member.pointsNextLevel ? program?.member.pointsNextLevel : '0')} puntos necesarios para ascender a membresía FR {program?.member.nextLevel}</Text>
+                            <Text fontSize="16px" color="neutral.10" fontWeight="325">{formatNumbers(program?.member.pointsNextLevel ? program?.member.pointsNextLevel : '0')} { t('myMemberships.cardInfoSection.text', {level: program?.member.nextLevel}) } </Text>
                           </Box>
                         </Box>                       
                 </GridItem>
@@ -101,8 +103,8 @@ export const MembershipDetails = () => {
                 <GridItem colSpan={{ base:12, md:6}} display={program?.Redemtions ? 'block': 'none'}>
                     <Box>
                       <Box mb="32px">
-                        <Text fontSize="24px" color="primary.10" my="16px">Puntos utilizados</Text>
-                        <Text fontSize="16px" fontWeight="300">Movimientos del último mes</Text>
+                        <Text fontSize="24px" color="primary.10" my="16px">{ t('myMemberships.redemtionSection.title') }</Text>
+                        <Text fontSize="16px" fontWeight="300">{ t('myMemberships.redemtionSection.subtitle') }</Text>
                       </Box>
                       {
                         program?.Redemtions?.map((el, i) => (
@@ -121,8 +123,8 @@ export const MembershipDetails = () => {
                 <GridItem colSpan={{ base:12, md:6}} display={program?.accreditations ? 'block': 'none'}>
                     <Box>
                       <Box mb="32px">
-                        <Text fontSize="24px" color="primary.10" my="16px">Puntos acumulados</Text>
-                        <Text fontSize="16px" fontWeight="300">Movimientos del último mes</Text>
+                        <Text fontSize="24px" color="primary.10" my="16px">{ t('myMemberships.accreditationSection.title') }</Text>
+                        <Text fontSize="16px" fontWeight="300">{ t('myMemberships.accreditationSection.subtitle') }</Text>
                       </Box>
                       {
                         program?.accreditations?.map((el, i) => (

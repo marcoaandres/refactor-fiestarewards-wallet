@@ -6,6 +6,7 @@ import { Link as ReactLink } from 'react-router-dom';
 import { useAppSelector, usePartnerProgramStore } from "../../hooks";
 import { useEffect } from "react";
 import { UserMembershipSectionLoader } from "./UserMembershipSectionLoader";
+import { useTranslation } from "react-i18next";
 
 
 export const UserMembershipSection = () => {
@@ -19,6 +20,8 @@ export const UserMembershipSection = () => {
     startLoadingPartnerPrograms()
   }, [])
 
+  const {t} = useTranslation()
+
   if(isLoadingPartnerPrograms)
     return <UserMembershipSectionLoader/>
 
@@ -26,12 +29,12 @@ export const UserMembershipSection = () => {
   return (
     <>
     <PrimarySection
-        title={`Hola, ${user?.name} ${user?.lastName}`}
-        subtitle="Estas son tus membresías. Para ver más información, haz clic sobre la tarjeta."
+        title={ t('home.userMembershipSection.title', { name: `${user?.name} ${user?.lastName }` })}
+        subtitle={ t('home.userMembershipSection.subtitle') }
         node={
           <>
-            <Text fontSize='base' fontWeight='300' lineHeight='base' color='primary.10'>Si no ubicas alguna de tus membresías comunícate a la Línea Fiesta Rewards  (*8585).</Text>
-            <Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to={`/my-memberships?program=${programs[0]?.program}`}>Ver todos</Button></Flex>
+            <Text fontSize='base' fontWeight='300' lineHeight='base' color='primary.10'>{ t('home.userMembershipSection.text') }</Text>
+            <Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to={`/my-memberships?program=${programs[0]?.program}`}>{ t('home.userMembershipSection.button') }</Button></Flex>
           </>
         }>
         <PrimarySlider slides={2}>

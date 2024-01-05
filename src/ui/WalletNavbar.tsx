@@ -4,6 +4,7 @@ import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButto
 import logoFr from "../assets/img/logo_FR.svg";
 import { ButtonToggle } from '../wallet/components/ButtonToggle';
 import { useAppSelector, useAuthStore } from '../hooks';
+import { useTranslation } from 'react-i18next';
 
 export const WalletNavbar = () => {
     const { user, status } = useAppSelector(state => state.auth)
@@ -17,6 +18,11 @@ export const WalletNavbar = () => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const toggleButton = (): void => setIsOpen(!isOpen)
+
+    const onSelectLanguage = (lang: string): void => {
+        i18n.changeLanguage(lang)
+    }
+    const { i18n, t } = useTranslation()
 
 
   return (
@@ -86,10 +92,10 @@ export const WalletNavbar = () => {
                         md: 'auto',
                     }}
                 >
-                    <Link as={ReactLink} to='/' px='12px' py='16px' variant='underline'>Home</Link>
-                    <Link as={ReactLink} to={`/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline'>My Memberships</Link>
-                    <Link as={ReactLink} to='/benefits' px='12px' py='16px' variant='underline'>Benefits</Link>
-                    <Link px='12px' py='16px' variant='underline'  onClick={onLogout}  display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}>Logout</Link>
+                    <Link as={ReactLink} to='/' px='12px' py='16px' variant='underline'>{ t('nav.home') }</Link>
+                    <Link as={ReactLink} to={`/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline'>{ t('nav.myMemberships') }</Link>
+                    <Link as={ReactLink} to='/benefits' px='12px' py='16px' variant='underline'>{ t('nav.benefits') }</Link>
+                    <Link px='12px' py='16px' variant='underline'  onClick={onLogout}  display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}>{ t('nav.logout') }</Link>
                 </Stack>
                 
                 <Stack 
@@ -100,9 +106,13 @@ export const WalletNavbar = () => {
                     w={{base: '100%', md: '100%', xl: 'auto'}}
                     gap="0"    
                 >
-                    <Button variant='secondary' size='xs'>Es</Button>
+                    <Button
+                        onClick={() => onSelectLanguage('es')}
+                        variant='secondary' size='xs'>Es</Button>
                     <span>|</span>
-                    <Button variant='secondary' size='xs'>En</Button>
+                    <Button 
+                        onClick={() => onSelectLanguage('en')}
+                        variant='secondary' size='xs'>En</Button>
                 </Stack>
                 <Stack 
                     w={{base: '100%',md: '100%',xl: 'auto'}} 
@@ -143,7 +153,7 @@ export const WalletNavbar = () => {
                 <MenuList>
                     <MenuItem
                     onClick={onLogout}  
-                    >Logout</MenuItem>
+                    >{ t('nav.logout') }</MenuItem>
                 </MenuList>
                 </Menu>
             </Stack>
