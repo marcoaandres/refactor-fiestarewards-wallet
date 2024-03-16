@@ -6,6 +6,7 @@ import { ButtonToggle } from '../wallet/components/ButtonToggle';
 import { useAppSelector, useAuthStore } from '../hooks';
 import { useTranslation } from 'react-i18next';
 
+
 export const WalletNavbar = () => {
     const { user, status } = useAppSelector(state => state.auth)
     const { programs } = useAppSelector(state => state.partnerPrograms)
@@ -23,6 +24,8 @@ export const WalletNavbar = () => {
         i18n.changeLanguage(lang)
     }
     const { i18n, t } = useTranslation()
+
+    const currentLanguaje = i18n.resolvedLanguage 
 
 
   return (
@@ -108,10 +111,12 @@ export const WalletNavbar = () => {
                 >
                     <Button
                         onClick={() => onSelectLanguage('es')}
+                        isActive={currentLanguaje === 'es'}
                         variant='secondary' size='xs'>Es</Button>
                     <span>|</span>
                     <Button 
                         onClick={() => onSelectLanguage('en')}
+                        isActive={currentLanguaje === 'en'}
                         variant='secondary' size='xs'>En</Button>
                 </Stack>
                 <Stack 

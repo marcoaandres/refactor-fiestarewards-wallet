@@ -36,6 +36,9 @@ const Button =  defineStyleConfig({
                     opacity: 1,
                 }
             },
+            _active: {
+                fontWeight: '350'
+            }
         },
         'outline':{
             color: 'primary.10',
