@@ -1,29 +1,13 @@
 import { useState } from 'react'
-import { Box, Button, Flex, FormControl, FormErrorMessage, Grid, GridItem, Heading, Img, Input, InputGroup, InputRightElement, Stack, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormErrorMessage, Grid, GridItem, Heading, Img, Input, InputGroup, InputRightElement, Link, Stack, useDisclosure } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useAuthStore } from '../../hooks'
 import { Form, Formik } from 'formik'
 import { string, object, ref, InferType } from 'yup'
 import { CustomAlert } from '../components/CustomAlert'
 import logoFr from "../../assets/img/logo_FR.svg";
-
-const registerSchema = object({
-  name: string()
-    .required('Este campo es requerido')
-    .min(4, 'El nombre  debe tener una longitud mínima de 4 caracteres.'),
-  lastName: string()
-    .required('Este campo es requerido')
-    .min(4, 'El apellido debe tener una longitud mínima de 4 caracteres.'),
-  email: string()
-    .required('Este campo es requerido')
-    .email('Introduzca un correo electrónico válido'),
-  password: string()
-    .required('Este campo es requerido')
-    .min(8, 'La contraseña debe tener una longitud mínima de 8 caracteres.'),
-  confirmPassword: string()
-    .oneOf([ref("password")], "Las contraseñas no coinciden")
-    .required('Confirma tu contraseña'),
-})
+import { useTranslation } from 'react-i18next'
+import { Link as ReactLink } from 'react-router-dom';
 
 const initialValues = {
   name: "",
@@ -33,9 +17,9 @@ const initialValues = {
   confirmPassword: "",
 }
 
-type Register = InferType<typeof registerSchema>
-
 export const RegisterPage = () => {
+  type Register = InferType<typeof registerSchema>
+  
   const { startRegister } = useAuthStore();
   const [titleAlert, setTitleAlert] = useState('')
   const {
@@ -52,6 +36,25 @@ export const RegisterPage = () => {
     startRegister({email, name, lastName, password})
   }
 
+  const { t } = useTranslation();
+  const registerSchema = object({
+    name: string()
+    .required(t('validateForm.isRequired'))
+    .min(4, t('validateForm.lengthGreaterThan', {characters: 4})),
+    lastName: string()
+    .required(t('validateForm.isRequired'))
+    .min(4, t('validateForm.lengthGreaterThan', {characters: 4})),
+    email: string()
+    .required(t('validateForm.isRequired'))
+    .email(t('validateForm.emailValid')),
+    password: string()
+    .required(t('validateForm.isRequired'))
+    .min(8, t('validateForm.lengthGreaterThan', {characters: 8})),
+    confirmPassword: string()
+    .oneOf([ref("password")], t('validateForm.matchPasword'))
+    .required(t('validateForm.confirmPassword')),
+  })
+  
   return (
     <>
       <Box minH="80vh" my="12">
@@ -69,11 +72,12 @@ export const RegisterPage = () => {
                   <GridItem colSpan={{base: 10, md:6, '2xl':4}} boxShadow="md" p={{base:"6", md:"10"}} my={{base:"4"}}>
                   <Flex justifyContent="center"><Img src={logoFr} width="120px" /></Flex>
                     <Box mt="56px" mb="36px">
-                        <Heading as="h1" size={{base:"title-base", md:"title"}}>Registro</Heading>
+                        <Heading as="h1" size={{base:"title-base", md:"title"}}>{ t('register.title') }</Heading>
+                        <Link as={ReactLink} to="/login">{ t('register.subtitle') }</Link>
                     </Box>
                   <Stack spacing={4}>
                     <FormControl isInvalid={touched.name && Boolean(errors.name)}>
-                      <Input placeholder='Nombre' size='sm' 
+                      <Input placeholder={ t('registerForm.name') } size='sm' 
                         name="name"
                         value={values.name}
                         onChange={handleChange}
@@ -82,7 +86,7 @@ export const RegisterPage = () => {
                       <FormErrorMessage>{touched.name && errors.name}</FormErrorMessage>
                     </FormControl>
                     <FormControl isInvalid={touched.lastName && Boolean(errors.lastName)}>
-                      <Input placeholder='Apellidos' size='sm' 
+                      <Input placeholder={ t('registerForm.lastName') } size='sm' 
                         name="lastName"
                         value={values.lastName}
                         onChange={handleChange}
@@ -91,7 +95,7 @@ export const RegisterPage = () => {
                        <FormErrorMessage>{touched.lastName && errors.lastName}</FormErrorMessage>
                     </FormControl>
                     <FormControl isInvalid={touched.email && Boolean(errors.email)}>
-                      <Input placeholder='Email' size='sm'
+                      <Input placeholder={ t('registerForm.email') } size='sm'
                         name="email"
                         value={values.email}
                         onChange={handleChange}
@@ -104,7 +108,7 @@ export const RegisterPage = () => {
                         <Input
                           pr='4.5rem'
                           type={showPassword ? 'text' : 'password'}
-                          placeholder='Contraseña'
+                          placeholder={ t('registerForm.password') }
                           name="password"
                           value={values.password}
                           onChange={handleChange}
@@ -123,7 +127,7 @@ export const RegisterPage = () => {
                         <Input
                           pr='4.5rem'
                           type={showConfirmPassword ? 'text' : 'password'}
-                          placeholder='Confirma la contraseña'
+                          placeholder={ t('registerForm.confirmPassword') }
                           name="confirmPassword"
                           value={values.confirmPassword}
                           onChange={handleChange}
@@ -139,7 +143,7 @@ export const RegisterPage = () => {
                     </FormControl>
 
                     <Flex justifyContent="center">
-                      <Button size="md" type='submit' isDisabled={!(dirty && isValid)}>Registrar</Button>
+                      <Button size="md" type='submit' isDisabled={!(dirty && isValid)}>{ t('register.button') }</Button>
                     </Flex>
                       
                   </Stack>

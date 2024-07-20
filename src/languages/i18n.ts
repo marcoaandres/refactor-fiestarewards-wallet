@@ -79,6 +79,34 @@ i18n
                     },
                     benefits:{
                         title: 'Experiencias pensadas para ti'
+                    },
+                    login:{
+                        title: 'Inicia sesión en tu cuenta',
+                        subtitle: '¿No tienes cuenta? Regístrate',
+                        button: 'Iniciar sesión'
+                    },
+                    register:{
+                        title: 'Regístrate y disfruta',
+                        subtitle: '¿Ya tienes una cuenta? Inicia sesión',
+                        button: 'Regístrate'
+                    },
+                    registerForm:{
+                        name: 'Nombre',
+                        lastName: 'Apellidos',
+                        email: 'Email',
+                        password: 'Contraseña',
+                        confirmPassword: 'Confirma la contraseña'
+                    },
+                    loginForm:{
+                        email: 'Introduce tu correo',
+                        password: 'Introduce tu contraseña'
+                    },
+                    validateForm: {
+                        isRequired: 'Este campo es requerido',
+                        lengthGreaterThan: 'Este campo debe tener una longitud mínima de {{characters}} caracteres.',
+                        emailValid: 'Introduzca un correo electrónico válido',
+                        confirmPassword: 'Confirma tu contraseña',
+                        matchPasword: "Las contraseñas no coinciden"
                     }
                     
                 }
@@ -148,6 +176,35 @@ i18n
                     },
                     benefits:{
                         title: 'Experiences especially created for you'
+                    },
+                    login:{
+                        title: 'Sing in to your account',
+                        subtitle: 'You do not have an account? Check in',
+                        button: 'Log in'
+                    },
+                    register:{
+                        title: 'Sign up and enjoy',
+                        subtitle: 'Already have an account? Log in',
+                        button: 'Sing up'
+                    },
+                    registerForm:{
+                        name: 'Name',
+                        lastName: 'Last name',
+                        email: 'Email',
+                        password: 'password',
+                        confirmPassword: 'Confirm password'
+                    },
+                    loginForm:{
+                        email: 'Enter your email',
+                        password: 'Enter your password'
+                    },
+                    
+                    validateForm: {
+                        isRequired: 'This field is required',
+                        lengthGreaterThan: 'This field must have a minimum length of {{characters}} characters.',
+                        emailValid: 'Please enter a valid email',
+                        confirmPassword: 'Confirm your password',
+                        matchPasword: "Passwords don't match"
                     }
                 }
             },

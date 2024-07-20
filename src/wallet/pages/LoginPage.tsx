@@ -7,23 +7,17 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { CustomAlert } from "../components/CustomAlert"
 import { useAuthStore } from "../../hooks"
 import logoFr from "../../assets/img/logo_FR.svg"
+import { useTranslation } from 'react-i18next'
 
 const initialValues = {
   email: 'angelito@gmail.com',
   password: '123456',
 }
-const loginSchema = object({
-  email: string()
-    .required('Este campo es requerido')
-    .email('Introduzca un correo electrónico válido'),
-  password: string()
-    .required('Este campo es requerido')
-    .min(6, 'La contraseña debe tener una longitud mínima de 8 caracteres.'),
-})
 
-type Login = InferType<typeof loginSchema>
 
 export const LoginPage = () => {
+  type Login = InferType<typeof loginSchema>
+
   const { startLogin } = useAuthStore()
   const [titleAlert, setTitleAlert] = useState('')
   const {
@@ -40,6 +34,17 @@ export const LoginPage = () => {
     startLogin({email, password})
   }
 
+  const { t } = useTranslation()
+
+  const loginSchema = object({
+    email: string()
+      .required(t('validateForm.isRequired'))
+      .email(t('validateForm.emailValid')),
+    password: string()
+      .required(t('validateForm.isRequired'))
+      .min(6, t('validateForm.lengthGreaterThan', {characters: 6})),
+  })
+  
   return (
     <>
       <Formik
@@ -57,12 +62,12 @@ export const LoginPage = () => {
                     <GridItem colSpan={{base: 10, md:6, '2xl':4 }} boxShadow="md" p={{base:"6", md:"10"}} my={{base:"3"}}>
                       <Flex justifyContent="center"><Img src={logoFr} width="120px" /></Flex>
                       <Box mt="56px" mb="36px">
-                          <Heading as="h1" size={{base:"title-base", md:"title"}}>Log in to your account</Heading>
-                          <Link as={ReactLink} to="/register">¿No tienes cuenta? Regístrate</Link>
+                          <Heading as="h1" size={{base:"title-base", md:"title"}}>{ t('login.title') }</Heading>
+                          <Link as={ReactLink} to="/register">{ t('login.subtitle') }</Link>
                       </Box>
                     <Stack spacing={4}>
                       <FormControl isInvalid={touched.email && Boolean(errors.email)}>
-                        <Input placeholder='Enter your email' size='sm'
+                        <Input placeholder={ t('loginForm.email') } size='sm'
                           name="email"
                           value={values.email}
                           onChange={handleChange}
@@ -76,7 +81,7 @@ export const LoginPage = () => {
                         <Input
                           pr='4.5rem'
                           type={show ? 'text' : 'password'}
-                          placeholder='Enter your password'
+                          placeholder={ t('loginForm.password') }
                           name='password'
                           value={values.password}
                           onChange={handleChange}
@@ -95,7 +100,7 @@ export const LoginPage = () => {
                         <Button size="md" type='submit' 
                             isDisabled={!(isValid)}
                           >
-                            Inicia sesión
+                            { t('login.button') }
                           </Button>
                       </Flex>
                     </Stack>
