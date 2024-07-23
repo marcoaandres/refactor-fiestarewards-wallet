@@ -37,7 +37,7 @@ const Button =  defineStyleConfig({
                 }
             },
             _active: {
-                fontWeight: '350'
+                fontWeight: '400'
             }
         },
         'outline':{

@@ -18,12 +18,13 @@ export const HomePage = () => {
   return (
     <>  
       { 
-      !isLogged && <PrimaryBanner
-        title={ t('home.bannerSection.title') }
-        imageDescription="Descipción de imagen"
-        image={BannerHome}
-        child={<Button as={ReactLink} to="/login" display={{base: 'none', md:'block'}}>{ t('home.bannerSection.button') }</Button>}
-      />
+        !isLogged && 
+        <PrimaryBanner
+          title={ t('home.bannerSection.title') }
+          imageDescription="Descipción de imagen"
+          image={BannerHome}
+          child={<Button as={ReactLink} to="/login" display={{base: 'none', md:'block'}}>{ t('home.bannerSection.button') }</Button>}
+        />
       }
       {
         isLogged &&
@@ -32,22 +33,29 @@ export const HomePage = () => {
       
       <PromotionSection/>
 
-      <SectionWithImage 
+      {
+        !isLogged &&
+        <SectionWithImage 
         title={ t('home.discoverSection.title') }
         subtitle={ t('home.discoverSection.subtitle') }
         picture={Home1}
         background="primary.60"
         child={<Button as={ReactLink} to='/login' mt="6">{ t('home.discoverSection.button') }</Button>}
       />
+      }
       <MembershipSection/>
-      <SectionWithImage 
-        title={ t('home.letStartSection.title') }
-        subtitle={ t('home.letStartSection.subtitle') }
-        picture={Home2}
-        background="primary.60"
-        revert={true}
-        child={<Button as={ReactLink} to='/login' mt="6">{ t('home.letStartSection.button') }</Button>}
-      />
+
+      {
+        !isLogged &&
+        <SectionWithImage 
+          title={ t('home.letStartSection.title') }
+          subtitle={ t('home.letStartSection.subtitle') }
+          picture={Home2}
+          background="primary.60"
+          revert={true}
+          child={<Button as={ReactLink} to='/login' mt="6">{ t('home.letStartSection.button') }</Button>}
+        />
+      }
     </>
   )
 }

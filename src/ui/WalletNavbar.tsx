@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link as ReactLink } from 'react-router-dom'
+import { NavLink, Link as ReactLink } from 'react-router-dom'
 import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButton, MenuItem, MenuList,  Stack, Text } from '@chakra-ui/react'
 import logoFr from "../assets/img/logo_FR.svg";
 import { ButtonToggle } from '../wallet/components/ButtonToggle';
@@ -95,9 +95,12 @@ export const WalletNavbar = () => {
                         md: 'auto',
                     }}
                 >
-                    <Link as={ReactLink} to='/' px='12px' py='16px' variant='underline'>{ t('nav.home') }</Link>
-                    <Link as={ReactLink} to={`/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline'>{ t('nav.myMemberships') }</Link>
-                    <Link as={ReactLink} to='/benefits' px='12px' py='16px' variant='underline'>{ t('nav.benefits') }</Link>
+                    <Link as={NavLink}  to='/' px='12px' py='16px' variant='underline' _activeLink={{
+                    fontWeight: '800'}}>{ t('nav.home') }</Link>
+                    <Link as={NavLink} to={`/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline' _activeLink={{
+                    fontWeight: '800'}}>{ t('nav.myMemberships') }</Link>
+                    <Link as={NavLink} to='/benefits' px='12px' py='16px' variant='underline' _activeLink={{
+                    fontWeight: '800'}}>{ t('nav.benefits') }</Link>
                     <Link px='12px' py='16px' variant='underline'  onClick={onLogout}  display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}>{ t('nav.logout') }</Link>
                 </Stack>
                 

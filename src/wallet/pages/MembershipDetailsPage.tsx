@@ -41,7 +41,7 @@ export const MembershipDetails = () => {
                 <Flex mt="8px">
                   <Button as={ReactLink} 
                   to="/"
-                  leftIcon={<ChevronLeftIcon   boxSize={5} ml="8px"/> } 
+                  leftIcon={<ChevronLeftIcon   boxSize={5} ml={{base:"0", md:"8px"}}/> } 
                   variant="secondary"
                   fontSize="16px" 
                   fontWeight="350" 
