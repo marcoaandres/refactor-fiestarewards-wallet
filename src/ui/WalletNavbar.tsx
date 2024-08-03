@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Link as ReactLink } from 'react-router-dom'
+import { NavLink, Link as ReactLink, useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButton, MenuItem, MenuList,  Stack, Text } from '@chakra-ui/react'
 import logoFr from "../assets/img/logo_FR.svg";
 import { ButtonToggle } from '../wallet/components/ButtonToggle';
@@ -12,6 +12,8 @@ export const WalletNavbar = () => {
     const { programs } = useAppSelector(state => state.partnerPrograms)
     const { startLogout } = useAuthStore()
 
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const onLogout = (): void => {
         startLogout()
@@ -22,11 +24,17 @@ export const WalletNavbar = () => {
 
     const onSelectLanguage = (lang: string): void => {
         i18n.changeLanguage(lang)
+        const [language, ...path] = location.pathname.slice(1).split('/');
+        navigate(
+            {
+                ...location,
+                pathname: `/${ [lang, ...path].join('/') }`
+            },
+            {replace: true}
+    )
     }
     const { i18n, t } = useTranslation()
-
     const currentLanguaje = i18n.resolvedLanguage 
-
 
   return (
     <Grid templateColumns='repeat(12, 1fr)' gap="0"  
@@ -48,7 +56,7 @@ export const WalletNavbar = () => {
             flex={"1 1 auto"}
             
             >
-            <Link as={ReactLink} to='/' order="1" mr="auto">
+            <Link as={ReactLink} to={`/${currentLanguaje}`} order="1" mr="auto">
                 <Image src={logoFr} htmlWidth="90px" alt="logotipo de Fiesta Rewards" />
             </Link>
             <ButtonToggle toggle={toggleButton} isOpen={isOpen} order="2"/>
@@ -95,11 +103,11 @@ export const WalletNavbar = () => {
                         md: 'auto',
                     }}
                 >
-                    <Link as={NavLink}  to='/' px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink}  to={`/${currentLanguaje}`} end px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.home') }</Link>
-                    <Link as={NavLink} to={`/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink} to={`/${currentLanguaje}/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.myMemberships') }</Link>
-                    <Link as={NavLink} to='/benefits' px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink} to={`/${currentLanguaje}/benefits`} px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.benefits') }</Link>
                     <Link px='12px' py='16px' variant='underline'  onClick={onLogout}  display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}>{ t('nav.logout') }</Link>
                 </Stack>
@@ -133,8 +141,8 @@ export const WalletNavbar = () => {
                     ml="auto"
                     display={`${user ? 'none' : 'flex'}`}
                 >
-                    <Button variant='secondary' as={ReactLink} to='/register'>Sign Up</Button>
-                    <Button as={ReactLink} to='/login'>Log in</Button>
+                    <Button variant='secondary' as={ReactLink} to={`/${currentLanguaje}/register`}>Sign Up</Button>
+                    <Button as={ReactLink} to={`/${currentLanguaje}/login`}>Log in</Button>
                 </Stack>
                 <Menu>
                 <MenuButton

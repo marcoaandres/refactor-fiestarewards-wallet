@@ -20,7 +20,8 @@ export const UserMembershipSection = () => {
     startLoadingPartnerPrograms()
   }, [])
 
-  const {t} = useTranslation()
+  const {i18n, t} =useTranslation() 
+  const currentLanguaje = i18n.resolvedLanguage 
 
   if(isLoadingPartnerPrograms)
     return <UserMembershipSectionLoader/>
@@ -34,14 +35,14 @@ export const UserMembershipSection = () => {
         node={
           <>
             <Text fontSize='base' fontWeight='300' lineHeight='base' color='primary.10'>{ t('home.userMembershipSection.text') }</Text>
-            <Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to={`/my-memberships?program=${programs[0]?.program}`}>{ t('home.userMembershipSection.button') }</Button></Flex>
+            <Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to={`/${currentLanguaje}/my-memberships?program=${programs[0]?.program}`}>{ t('home.userMembershipSection.button') }</Button></Flex>
           </>
         }>
         <PrimarySlider slides={2}>
           {
             programs.map(({ programImage, member, program }) => (
               <SwiperSlide key={member.ownerNumber}>
-                <ReactLink to={`/my-memberships?program=${program}`} >
+                <ReactLink to={`/${currentLanguaje}/my-memberships?program=${program}`} >
                   <TirthCard 
                     image={programImage}
                     imageDescription="Description"

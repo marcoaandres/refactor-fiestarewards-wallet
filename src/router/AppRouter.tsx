@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { BenefitsPage, HomePage, LoginPage, RegisterPage } from '../wallet/pages'
 import { AuthRoutes } from '../wallet/routes/AuthRoutes'
 import { WalletFooter, WalletNavbar } from '../ui'
@@ -23,19 +23,21 @@ export const AppRouter = () => {
     <>
       <WalletNavbar/>
       <Routes>
+        {/* RUTA CON IDIOMA DEFAULT */}
+        <Route path='/' element={ <Navigate to={'/en'}/> }/>
 
         {/* RUTAS ACCECIBLES AL PUBLICO */}
-        <Route path='/' element={ <HomePage/> }/>
-        <Route path='/benefits' element={ <BenefitsPage/> }/>
+        <Route path='/:locale' element={ <HomePage /> }/>
+        <Route path='/:locale/benefits' element={ <BenefitsPage/> }/>
 
         {/* ROTAS SOLO PARA USUARION NO AUTENTICADOS */}
-        <Route path='/register' element= {
+        <Route path='/:locale/register' element= {
           <PublicRoute>
             <RegisterPage/>
           </PublicRoute>
         }
         />
-        <Route path='/login' element= {
+        <Route path='/:locale/login' element= {
           <PublicRoute>
             <LoginPage/>
           </PublicRoute>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link as ReactLink } from "react-router-dom"
 import { Box, Link} from "@chakra-ui/react"
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons"
+import { useTranslation } from "react-i18next"
 
 
 type props = {
@@ -11,6 +12,8 @@ type props = {
 export const WalletSidebar = ({ programs }:props) => {
 
     const [showMenu, setShowMenu] = useState(false)
+    const { i18n } = useTranslation()
+    const currentLanguaje = i18n.resolvedLanguage 
 
     const onToggleMenu = () => {
         setShowMenu(!showMenu)
@@ -26,7 +29,7 @@ export const WalletSidebar = ({ programs }:props) => {
             {
                 programs.map((program)=> (
                     <Box key={program}>
-                        <Link as={ReactLink} to={`/my-memberships?program=${program}`} p="16px 32px" display="block" variant="sidebar">{program === 'FR' ? 'Fiesta Rewards' : 'Apreciare'}</Link>
+                        <Link as={ReactLink} to={`/${currentLanguaje}/my-memberships?program=${program}`} p="16px 32px" display="block" variant="sidebar">{program === 'FR' ? 'Fiesta Rewards' : 'Apreciare'}</Link>
                     </Box>
                 ))
             }

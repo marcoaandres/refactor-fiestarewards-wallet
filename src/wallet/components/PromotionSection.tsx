@@ -25,7 +25,8 @@ export const PromotionSection = () => {
         onOpen()
     }
 
-    const {t} = useTranslation()
+    const {i18n, t} =useTranslation() 
+  const currentLanguaje = i18n.resolvedLanguage 
 
     if(isLoadingPromotions)
     return <SectionLoader/>
@@ -35,7 +36,7 @@ export const PromotionSection = () => {
         <PrimarySection
             title={ t('home.promotionSection.title') }
             subtitle={ t('home.promotionSection.subtitle') }
-            node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to='/benefits'>{ t('home.promotionSection.button') }</Button></Flex>}
+            node={<Flex justifyContent="right" mt="36px"><Button as={ReactLink} variant="outline" to={`/${currentLanguaje}/benefits`}>{ t('home.promotionSection.button') }</Button></Flex>}
           >
             <PrimarySlider>
               {

@@ -13,7 +13,8 @@ export const HomePage = () => {
   
   const isLogged = (status === 'authenticated')
 
-  const {t} =useTranslation() 
+  const {i18n, t} =useTranslation() 
+  const currentLanguaje = i18n.resolvedLanguage 
 
   return (
     <>  
@@ -23,7 +24,7 @@ export const HomePage = () => {
           title={ t('home.bannerSection.title') }
           imageDescription="Descipción de imagen"
           image={BannerHome}
-          child={<Button as={ReactLink} to="/login" display={{base: 'none', md:'block'}}>{ t('home.bannerSection.button') }</Button>}
+          child={<Button as={ReactLink} to={`/${currentLanguaje}/login`} display={{base: 'none', md:'block'}}>{ t('home.bannerSection.button') }</Button>}
         />
       }
       {
@@ -40,7 +41,7 @@ export const HomePage = () => {
         subtitle={ t('home.discoverSection.subtitle') }
         picture={Home1}
         background="primary.60"
-        child={<Button as={ReactLink} to='/login' mt="6">{ t('home.discoverSection.button') }</Button>}
+        child={<Button as={ReactLink} to={`/${currentLanguaje}/login`} mt="6">{ t('home.discoverSection.button') }</Button>}
       />
       }
       <MembershipSection/>
@@ -53,7 +54,7 @@ export const HomePage = () => {
           picture={Home2}
           background="primary.60"
           revert={true}
-          child={<Button as={ReactLink} to='/login' mt="6">{ t('home.letStartSection.button') }</Button>}
+          child={<Button as={ReactLink} to={`/${currentLanguaje}/login`} mt="6">{ t('home.letStartSection.button') }</Button>}
         />
       }
     </>
