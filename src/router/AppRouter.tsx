@@ -24,7 +24,7 @@ export const AppRouter = () => {
       <WalletNavbar/>
       <Routes>
         {/* RUTA CON IDIOMA DEFAULT */}
-        <Route path='/' element={ <Navigate to={'/en'}/> }/>
+        <Route path='/' element={ <HomePage /> }/>
 
         {/* RUTAS ACCECIBLES AL PUBLICO */}
         <Route path='/:locale' element={ <HomePage /> }/>

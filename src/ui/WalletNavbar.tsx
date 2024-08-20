@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Link as ReactLink, useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButton, MenuItem, MenuList,  Stack, Text } from '@chakra-ui/react'
+import { useTranslation } from 'react-i18next';
+import Cookies from 'js-cookie';
 import logoFr from "../assets/img/logo_FR.svg";
 import { ButtonToggle } from '../wallet/components/ButtonToggle';
 import { useAppSelector, useAuthStore } from '../hooks';
-import { useTranslation } from 'react-i18next';
 
 
 export const WalletNavbar = () => {
     const { user, status } = useAppSelector(state => state.auth)
     const { programs } = useAppSelector(state => state.partnerPrograms)
     const { startLogout } = useAuthStore()
+    const [currentLang, setcurrentLang] = useState('en')
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -22,19 +24,35 @@ export const WalletNavbar = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const toggleButton = (): void => setIsOpen(!isOpen)
 
+    useEffect(() => {
+        const [language, ..._] = location.pathname.slice(1).split('/')
+        const languageCookie = Cookies.get('i18next') || 'en'
+        
+        if((language === 'es' || language === 'en')){
+            i18n.changeLanguage(language)
+            setcurrentLang(language)
+        }else{
+            i18n.changeLanguage(languageCookie)
+            setcurrentLang(languageCookie)
+        }
+    }, [])
+    
+    
+
     const onSelectLanguage = (lang: string): void => {
         i18n.changeLanguage(lang)
-        const [language, ...path] = location.pathname.slice(1).split('/');
+        const [_, ...path] = location.pathname.slice(1).split('/')
+        setcurrentLang(lang)
         navigate(
             {
                 ...location,
                 pathname: `/${ [lang, ...path].join('/') }`
             },
             {replace: true}
-    )
+        )
     }
     const { i18n, t } = useTranslation()
-    const currentLanguaje = i18n.resolvedLanguage 
+    
 
   return (
     <Grid templateColumns='repeat(12, 1fr)' gap="0"  
@@ -56,7 +74,7 @@ export const WalletNavbar = () => {
             flex={"1 1 auto"}
             
             >
-            <Link as={ReactLink} to={`/${currentLanguaje}`} order="1" mr="auto">
+            <Link as={ReactLink} to={`/${currentLang}`} order="1" mr="auto">
                 <Image src={logoFr} htmlWidth="90px" alt="logotipo de Fiesta Rewards" />
             </Link>
             <ButtonToggle toggle={toggleButton} isOpen={isOpen} order="2"/>
@@ -103,11 +121,11 @@ export const WalletNavbar = () => {
                         md: 'auto',
                     }}
                 >
-                    <Link as={NavLink}  to={`/${currentLanguaje}`} end px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink}  to={`/${currentLang}`} end px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.home') }</Link>
-                    <Link as={NavLink} to={`/${currentLanguaje}/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink} to={`/${currentLang}/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.myMemberships') }</Link>
-                    <Link as={NavLink} to={`/${currentLanguaje}/benefits`} px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink} to={`/${currentLang}/benefits`} px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.benefits') }</Link>
                     <Link px='12px' py='16px' variant='underline'  onClick={onLogout}  display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}>{ t('nav.logout') }</Link>
                 </Stack>
@@ -122,12 +140,12 @@ export const WalletNavbar = () => {
                 >
                     <Button
                         onClick={() => onSelectLanguage('es')}
-                        isActive={currentLanguaje === 'es'}
+                        isActive={currentLang === 'es'}
                         variant='secondary' size='xs'>Es</Button>
                     <span>|</span>
                     <Button 
                         onClick={() => onSelectLanguage('en')}
-                        isActive={currentLanguaje === 'en'}
+                        isActive={currentLang === 'en'}
                         variant='secondary' size='xs'>En</Button>
                 </Stack>
                 <Stack 
@@ -141,8 +159,8 @@ export const WalletNavbar = () => {
                     ml="auto"
                     display={`${user ? 'none' : 'flex'}`}
                 >
-                    <Button variant='secondary' as={ReactLink} to={`/${currentLanguaje}/register`}>Sign Up</Button>
-                    <Button as={ReactLink} to={`/${currentLanguaje}/login`}>Log in</Button>
+                    <Button variant='secondary' as={ReactLink} to={`/${currentLang}/register`}>Sign Up</Button>
+                    <Button as={ReactLink} to={`/${currentLang}/login`}>Log in</Button>
                 </Stack>
                 <Menu>
                 <MenuButton

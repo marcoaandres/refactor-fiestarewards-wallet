@@ -9,7 +9,12 @@ i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
+        debug: true,
         fallbackLng: 'en',
+        detection:{
+            order: ['cookie', 'htmlTag', 'localStorage', 'path', 'subdomain'],
+            caches: ['cookie'],
+        },
         interpolation:{
             escapeValue: false
         },
