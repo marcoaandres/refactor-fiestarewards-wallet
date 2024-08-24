@@ -112,6 +112,10 @@ i18n
                         emailValid: 'Introduzca un correo electrónico válido',
                         confirmPassword: 'Confirma tu contraseña',
                         matchPasword: "Las contraseñas no coinciden"
+                    },
+                    modal:{
+                        title: 'Terminos y condiciones',
+                        button: 'Cerrar'
                     }
                     
                 }
@@ -210,6 +214,10 @@ i18n
                         emailValid: 'Please enter a valid email',
                         confirmPassword: 'Confirm your password',
                         matchPasword: "Passwords don't match"
+                    },
+                    modal:{
+                        title: 'Terms and conditions',
+                        button: 'Close'
                     }
                 }
             },

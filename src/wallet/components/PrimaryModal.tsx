@@ -8,6 +8,7 @@ import {
     ModalBody,
     ModalCloseButton
 } from '@chakra-ui/react'
+import { useTranslation } from 'react-i18next'
 
   type primaryModalProps = {
     isOpen: boolean,
@@ -18,6 +19,7 @@ import {
 }
 
 export const PrimaryModal = ({ isOpen, onClose, terminos, textoBoton, redirectTo} : primaryModalProps) => {
+  const {t} = useTranslation() 
   const handleRedirect = () => {
     window.open(redirectTo)
     onClose()
@@ -27,14 +29,14 @@ export const PrimaryModal = ({ isOpen, onClose, terminos, textoBoton, redirectTo
       <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={'inside'}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Terminos y condiciones</ModalHeader>
+          <ModalHeader>{ t('modal.title') }</ModalHeader>
           <ModalCloseButton />
           <ModalBody fontWeight="light">
             {terminos}
           </ModalBody>
           <ModalFooter>
             <Button variant='secondary' mr={3} onClick={onClose}>
-              Cerrar
+            { t('modal.button') }
             </Button>
             <Button variant='primary' onClick={handleRedirect}>{textoBoton}</Button>
           </ModalFooter>
