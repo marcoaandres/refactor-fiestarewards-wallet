@@ -27,6 +27,7 @@ export const PromotionSection = () => {
 
     const {i18n, t} =useTranslation() 
   const currentLanguaje = i18n.resolvedLanguage 
+  const lang =  currentLanguaje == 'en' ? 'En' : ''
 
     if(isLoadingPromotions)
     return <SectionLoader/>
@@ -40,19 +41,20 @@ export const PromotionSection = () => {
           >
             <PrimarySlider>
               {
-                promotions.map(({idPromo, titulo, texto, terminos, producto, imagenSlider, url, textoBoton}) => (
-                  <SwiperSlide key={idPromo}>
+                promotions.map((promo) => (
+                  <SwiperSlide  key={promo['idPromo']}>
                     <PrimaryCard 
-                      id={idPromo}
-                      image={imagenSlider}
-                      imageDescription={idPromo} 
-                      title={titulo}
-                      description={texto}
-                      terms={terminos}
-                      tag={producto}
-                      redirect={url}
-                      textButton={textoBoton}
-                      showModalPromotion={showModalPromotion} />
+                      id={promo['idPromo']}
+                      image={promo['imagenSlider'+lang]}
+                      imageDescription={promo['idPromo']} 
+                      title={promo['titulo'+lang]}
+                      description={promo['texto'+lang]}
+                      terms={promo['terminos'+lang]}
+                      tag={promo['producto'+lang]}
+                      redirect={promo['url'+lang]}
+                      textButton={promo['textoBoton'+lang]}
+                      showModalPromotion={showModalPromotion}
+                  />
                 </SwiperSlide>
                 ))
               }
@@ -63,9 +65,9 @@ export const PromotionSection = () => {
             <PrimaryModal 
             isOpen={isOpen} 
             onClose={onClose}  
-            terminos={modalPromo.terminos} 
-            textoBoton={modalPromo.textoBoton}
-            redirectTo={modalPromo.url}
+            terminos={modalPromo['terminos'+lang]} 
+            textoBoton={modalPromo['textoBoton'+lang]}
+            redirectTo={modalPromo['url'+lang]}
             />
         }
     </>

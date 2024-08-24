@@ -4,6 +4,7 @@ import { useAppSelector, usePromotionStore } from "../../hooks"
 import { Promotion } from "../../interfaces/interfaces"
 import { BenefitSectionLoader, PrimarySection, SecondaryCard, PrimaryModal } from "../components"
 import { useTranslation } from "react-i18next"
+import i18next from "i18next"
 
 export const BenefitsPage = () => {
 
@@ -23,6 +24,9 @@ export const BenefitsPage = () => {
     onOpen()
   }
   const {t} = useTranslation() 
+  const resolvedLanguage: string = i18next.resolvedLanguage
+  const lang =  resolvedLanguage == 'en' ? 'En' : ''
+
   if(isLoadingPromotions)
     return <BenefitSectionLoader/>
 
@@ -32,18 +36,18 @@ export const BenefitsPage = () => {
         title={ t('benefits.title') }
       >
         {
-            promotions.map(({idPromo, titulo, texto, terminos, producto, imagenSlider, url, textoBoton}) => (
+            promotions.map((promo: Promotion) => (
               <SecondaryCard 
-                  key={idPromo}
-                  id={idPromo}
-                  image={imagenSlider}
-                  imageDescription={idPromo} 
-                  title={titulo}
-                  description={texto}
-                  terms={terminos}
-                  tag={producto}
-                  redirect={url}
-                  textButton={textoBoton}
+                  key={promo['idPromo']}
+                  id={promo['idPromo']}
+                  image={promo['imagenSlider'+lang]}
+                  imageDescription={promo['idPromo']} 
+                  title={promo['titulo'+lang]}
+                  description={promo['texto'+lang]}
+                  terms={promo['terminos'+lang]}
+                  tag={promo['producto'+lang]}
+                  redirect={promo['url'+lang]}
+                  textButton={promo['textoBoton'+lang]}
                   showModalPromotion={showModalPromotion}
                 />
             ))
