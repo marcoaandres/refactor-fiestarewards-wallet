@@ -6,6 +6,10 @@ import { WalletFooter, WalletNavbar } from '../ui'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
 import { useAuthStore } from '../hooks'
+import { SectionLoader } from '../wallet/components'
+import { UserMembershipSectionLoader } from '../wallet/components/UserMembershipSectionLoader'
+import { WalletNavbarLoader } from '../wallet/components/walletNavbarLoader'
+import { WalletFooterLoader } from '../wallet/components/WalletFooterLoader'
  
 export const AppRouter = () => {
 
@@ -17,7 +21,14 @@ export const AppRouter = () => {
   }, [])
 
   if(status === 'checking')
-  return 'cargando...'
+  return (
+  <>
+    <WalletNavbarLoader/>
+    <UserMembershipSectionLoader/>
+    <SectionLoader/>
+    <WalletFooterLoader/>
+  </>
+  )
 
   return (
     <>
