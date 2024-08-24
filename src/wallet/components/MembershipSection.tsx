@@ -12,7 +12,9 @@ export const MembershipSection = () => {
         startLoadingMemberships()
     }, [])
 
-    const {t} = useTranslation()
+    const {i18n, t} = useTranslation()
+    const currentLanguaje = i18n.resolvedLanguage 
+  const lang =  currentLanguaje == 'en' ? 'En' : ''
 
     if(isLoadingMemberships)
     return <SectionLoader/>
@@ -24,16 +26,16 @@ export const MembershipSection = () => {
       >
         <PrimarySlider>
           {
-            memberships.map(({ desktopImage, titleBenefits, nameMembership, benefits, url, buttonText   }) => (
-              <SwiperSlide key={titleBenefits}>
+            memberships.map((membersahihp) => (
+              <SwiperSlide key={membersahihp['id']}>
                 <AuxCard 
-                  image={desktopImage} 
-                  imageDescription={'Imagen random'}
-                  title={nameMembership} 
-                  subtitle={titleBenefits}
-                  benefits={benefits}
-                  redirect={url}
-                  textButton={buttonText}
+                  image={membersahihp['desktopImage'+lang]} 
+                  imageDescription={membersahihp['titleBenefits'+lang]}
+                  title={membersahihp['nameMembership'+lang]} 
+                  subtitle={membersahihp['titleBenefits'+lang]}
+                  benefits={membersahihp['benefits'+lang]}
+                  redirect={membersahihp['url'+lang]}
+                  textButton={membersahihp['buttonText'+lang]}
                 />
               </SwiperSlide>
             ))
