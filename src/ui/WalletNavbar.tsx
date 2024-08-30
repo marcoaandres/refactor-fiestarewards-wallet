@@ -1,28 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NavLink, Link as ReactLink, useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButton, MenuItem, MenuList,  Stack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import logoFr from "../assets/img/logo_FR.svg";
 import { ButtonToggle } from '../wallet/components/ButtonToggle';
-import { useAppSelector, useAuthStore } from '../hooks';
-
+import { useAppSelector, useAuthStore, useComponentVisible } from '../hooks';
 
 export const WalletNavbar = () => {
     const { user, status } = useAppSelector(state => state.auth)
     const { programs } = useAppSelector(state => state.partnerPrograms)
     const { startLogout } = useAuthStore()
     const [currentLang, setcurrentLang] = useState('en')
+    const { ref, isComponentVisible: isOpen, setIsComponentVisible: setIsOpen } = useComponentVisible(false)
 
     const location = useLocation()
     const navigate = useNavigate()
 
     const onLogout = (): void => {
         startLogout()
+        handlerCloseMenu()
     }
-
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    
     const toggleButton = (): void => setIsOpen(!isOpen)
+
+    const handlerCloseMenu = (): void => setIsOpen(false) 
 
     useEffect(() => {
         const [language, ..._] = location.pathname.slice(1).split('/')
@@ -40,6 +42,7 @@ export const WalletNavbar = () => {
     
 
     const onSelectLanguage = (lang: string): void => {
+        handlerCloseMenu()
         i18n.changeLanguage(lang)
         const [_, ...path] = location.pathname.slice(1).split('/')
         setcurrentLang(lang)
@@ -62,6 +65,7 @@ export const WalletNavbar = () => {
         left="0" 
         zIndex="999"
         bg="white"
+        ref={ref}
     >
         <GridItem colSpan={1}/>
         <GridItem colSpan={10}>
@@ -74,7 +78,7 @@ export const WalletNavbar = () => {
             flex={"1 1 auto"}
             
             >
-            <Link as={ReactLink} to={`/${currentLang}`} order="1" mr="auto">
+            <Link as={ReactLink} to={`/${currentLang}`} order="1" mr="auto" onClick={handlerCloseMenu}>
                 <Image src={logoFr} htmlWidth="90px" alt="logotipo de Fiesta Rewards" />
             </Link>
             <ButtonToggle toggle={toggleButton} isOpen={isOpen} order="2"/>
@@ -121,11 +125,11 @@ export const WalletNavbar = () => {
                         md: 'auto',
                     }}
                 >
-                    <Link as={NavLink}  to={`/${currentLang}`} end px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink}  to={`/${currentLang}`} end onClick={handlerCloseMenu} px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.home') }</Link>
-                    <Link as={NavLink} to={`/${currentLang}/my-memberships?program=${programs[0]?.program}`} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink} to={`/${currentLang}/my-memberships?program=${programs[0]?.program}`} onClick={handlerCloseMenu} display={`${user ? 'init' : 'none'}`} px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.myMemberships') }</Link>
-                    <Link as={NavLink} to={`/${currentLang}/benefits`} px='12px' py='16px' variant='underline' _activeLink={{
+                    <Link as={NavLink} to={`/${currentLang}/benefits`} onClick={handlerCloseMenu} px='12px' py='16px' variant='underline' _activeLink={{
                     fontWeight: '800'}}>{ t('nav.benefits') }</Link>
                     <Link px='12px' py='16px' variant='underline'  onClick={onLogout}  display={{ base: `${!user ? 'none' : 'inherit'}`, md: 'none' }}>{ t('nav.logout') }</Link>
                 </Stack>
@@ -159,8 +163,8 @@ export const WalletNavbar = () => {
                     ml="auto"
                     display={`${user ? 'none' : 'flex'}`}
                 >
-                    <Button variant='secondary' as={ReactLink} to={`/${currentLang}/register`}>Sign Up</Button>
-                    <Button as={ReactLink} to={`/${currentLang}/login`}>Log in</Button>
+                    <Button variant='secondary' as={ReactLink} to={`/${currentLang}/register`} onClick={handlerCloseMenu}>Sign Up</Button>
+                    <Button as={ReactLink} to={`/${currentLang}/login`} onClick={handlerCloseMenu}>Log in</Button>
                 </Stack>
                 <Menu>
                 <MenuButton
