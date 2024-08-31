@@ -1,5 +1,6 @@
+import { AxiosError } from 'axios';
 import { WalletApi } from '../api/WalletApi';
-import { User, UserLogin, UserRegister } from '../interfaces/interfaces';
+import { Error, User, UserLogin, UserRegister } from '../interfaces/interfaces';
 import { onChecking, onLoadPartnerPrograms, onLogin, onLogout, onLogoutPartnerPrograms, onSetPartnerPrograms } from '../store';
 import { useAppDispatch, useAppSelector } from './';
 
@@ -27,10 +28,8 @@ export const useAuthStore = () => {
             dispatch(onLogin(user))
 
         } catch (error) {
-
-            const errorMessage = error.response.data.msg
-            dispatch( onLogout(errorMessage) )
-
+            const err = error as AxiosError<Error>
+            dispatch( onLogout(err.response?.data.msg) )
         }
     }
 
@@ -77,9 +76,8 @@ export const useAuthStore = () => {
             dispatch(onSetPartnerPrograms(resp.data.partnerProgram.programs))
 
         } catch (error) {
-
-            const errorMessage = error.response.data.msg
-            dispatch( onLogout(errorMessage) )
+            const err = error as AxiosError<Error>
+            dispatch( onLogout(err.response?.data.msg) )
 
         }
     }
@@ -87,14 +85,14 @@ export const useAuthStore = () => {
     const startLogout = () => {
         localStorage.clear()
         dispatch( onLogoutPartnerPrograms() )
-        dispatch( onLogout() )
+        dispatch( onLogout('') )
     }
 
     // revisamos si el token es valido o no
     const checkAuthToken = async() => {
         // sí no existe deslogeamos al usuario
         const token = localStorage.getItem('token')
-        if(!token) return dispatch( onLogout() )
+        if(!token) return dispatch( onLogout('') )
 
         // intentamos renovar nuestro token
         try {

@@ -1,4 +1,7 @@
-
+export interface Error {
+    ok: boolean;
+    msg: string;
+  }
 
 export interface User{
     uid: string

@@ -41,7 +41,7 @@ export const PromotionSection = () => {
           >
             <PrimarySlider>
               {
-                promotions.map((promo) => (
+                promotions.map((promo: Record<string, any>) => (
                   <SwiperSlide  key={promo['idPromo']}>
                     <PrimaryCard 
                       id={promo['idPromo']}
@@ -63,11 +63,11 @@ export const PromotionSection = () => {
           {
             !!modalPromo && 
             <PrimaryModal 
-            isOpen={isOpen} 
-            onClose={onClose}  
-            terminos={modalPromo['terminos'+lang]} 
-            textoBoton={modalPromo['textoBoton'+lang]}
-            redirectTo={modalPromo['url'+lang]}
+              isOpen={isOpen} 
+              onClose={onClose}  
+              terminos={String(modalPromo['terminos'+lang as keyof Promotion])} 
+              textoBoton={String(modalPromo['textoBoton'+lang as keyof Promotion])}
+              redirectTo={String(modalPromo['url'+lang as keyof Promotion])}
             />
         }
     </>

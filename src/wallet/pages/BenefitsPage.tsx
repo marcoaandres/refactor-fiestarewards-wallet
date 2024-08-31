@@ -24,8 +24,8 @@ export const BenefitsPage = () => {
     onOpen()
   }
   const {t} = useTranslation() 
-  const resolvedLanguage: string = i18next.resolvedLanguage
-  const lang =  resolvedLanguage == 'en' ? 'En' : ''
+  const resolvedLanguage: string | undefined = i18next.resolvedLanguage
+  const lang = resolvedLanguage == 'en' ? 'En' : ''
 
   if(isLoadingPromotions)
     return <BenefitSectionLoader/>
@@ -36,7 +36,7 @@ export const BenefitsPage = () => {
         title={ t('benefits.title') }
       >
         {
-            promotions.map((promo: Promotion) => (
+            promotions.map((promo: Record<string, any>) => (
               <SecondaryCard 
                   key={promo['idPromo']}
                   id={promo['idPromo']}
@@ -55,12 +55,12 @@ export const BenefitsPage = () => {
       </PrimarySection>
       {
         !!modalPromo && 
-        <PrimaryModal 
+        <PrimaryModal
           isOpen={isOpen} 
           onClose={onClose}  
-          terminos={modalPromo.terminos} 
-          textoBoton={modalPromo.textoBoton}
-          redirectTo={modalPromo.url}
+          terminos={String(modalPromo['terminos'+lang as keyof Promotion])} 
+          textoBoton={String(modalPromo['textoBoton'+lang as keyof Promotion])}
+          redirectTo={String(modalPromo['url'+lang as keyof Promotion])}
         />
       }
     </Box>

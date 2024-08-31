@@ -21,11 +21,10 @@ export const RegisterPage = () => {
   type Register = InferType<typeof registerSchema>
   
   const { startRegister } = useAuthStore();
-  const [titleAlert, setTitleAlert] = useState('')
+  const [titleAlert] = useState('')
   const {
     isOpen: isVisible,
     onClose,
-    onOpen,
   } = useDisclosure()
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)

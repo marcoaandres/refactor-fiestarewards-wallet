@@ -1,15 +1,12 @@
-import { useEffect, useState } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { BenefitsPage, HomePage, LoginPage, RegisterPage } from '../wallet/pages'
 import { AuthRoutes } from '../wallet/routes/AuthRoutes'
 import { WalletFooter, WalletNavbar } from '../ui'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
 import { useAuthStore } from '../hooks'
-import { SectionLoader } from '../wallet/components'
-import { UserMembershipSectionLoader } from '../wallet/components/UserMembershipSectionLoader'
-import { WalletNavbarLoader } from '../wallet/components/walletNavbarLoader'
-import { WalletFooterLoader } from '../wallet/components/WalletFooterLoader'
+import { SectionLoader, UserMembershipSectionLoader, WalletNavbarLoader, WalletFooterLoader } from '../wallet/components'
  
 export const AppRouter = () => {
 

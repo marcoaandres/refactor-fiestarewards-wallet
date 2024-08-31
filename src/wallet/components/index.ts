@@ -16,4 +16,8 @@ export * from './SwiperButtonPrev'
 export * from './SwiperButtonNext'
 export * from './UserMembershipSection'
 export * from './MembershipSection'
+
 export * from './BenefitSectionLoader'
+export * from './UserMembershipSectionLoader'
+export * from './WalletNavbarLoader'
+export * from './WalletFooterLoader'

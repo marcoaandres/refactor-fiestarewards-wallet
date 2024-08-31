@@ -14,16 +14,14 @@ const initialValues = {
   password: '123456',
 }
 
-
 export const LoginPage = () => {
   type Login = InferType<typeof loginSchema>
 
   const { startLogin } = useAuthStore()
-  const [titleAlert, setTitleAlert] = useState('')
+  const [titleAlert] = useState('')
   const {
     isOpen: isVisible,
     onClose,
-    onOpen,
   } = useDisclosure()
 
   const [show, setShow] = useState(false)

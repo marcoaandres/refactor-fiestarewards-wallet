@@ -26,16 +26,19 @@ export const MembershipSection = () => {
       >
         <PrimarySlider>
           {
-            memberships.map((membersahihp) => (
-              <SwiperSlide key={membersahihp['id']}>
+            /**
+             * TypeScript permitirá acceder a cualquier propiedad de un objeto de tipo Record<any, any>aunque no se conozcan las claves específicas, ya que el primer parámetro genérico es any.
+             */
+            memberships.map((membership: Record<string, any>) => (
+              <SwiperSlide key={membership['id']}>
                 <AuxCard 
-                  image={membersahihp['desktopImage'+lang]} 
-                  imageDescription={membersahihp['titleBenefits'+lang]}
-                  title={membersahihp['nameMembership'+lang]} 
-                  subtitle={membersahihp['titleBenefits'+lang]}
-                  benefits={membersahihp['benefits'+lang]}
-                  redirect={membersahihp['url'+lang]}
-                  textButton={membersahihp['buttonText'+lang]}
+                  image={membership['desktopImage'+lang]} 
+                  imageDescription={membership['titleBenefits'+lang]}
+                  title={membership['nameMembership'+lang]} 
+                  subtitle={membership['titleBenefits'+lang]}
+                  benefits={membership['benefits'+lang]}
+                  redirect={membership['url'+lang]}
+                  textButton={membership['buttonText'+lang]}
                 />
               </SwiperSlide>
             ))

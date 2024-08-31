@@ -1,5 +1,4 @@
 import { Box, Grid, GridItem, SkeletonText } from '@chakra-ui/react'
-import React from 'react'
 import { CardLoader } from './CardLoader'
 
 export const SectionLoader = () => {

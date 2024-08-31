@@ -1,6 +1,4 @@
-import { Box, Flex, Grid, GridItem, Image, Skeleton, Spacer, Text } from "@chakra-ui/react"
-import logoPosadas from "../assets/img/Posadas.png";
-import { useTranslation } from "react-i18next";
+import { Box, Flex, Grid, GridItem, Skeleton, Spacer } from "@chakra-ui/react"
 
 export const WalletFooterLoader = () => {
 

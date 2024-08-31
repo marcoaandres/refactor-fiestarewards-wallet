@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
-export const useComponentVisible = ({initialIsVisible}) => {
+export const useComponentVisible = (initialIsVisible: boolean) => {
 
     const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible)
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>(null)
 
     const handleHideDropdown = (event: KeyboardEvent) => {
         if (event.key === "Escape") {
@@ -11,8 +11,8 @@ export const useComponentVisible = ({initialIsVisible}) => {
         }
     }
 
-    const handleClickOutside = (event) => {
-        if (ref.current && !ref.current.contains(event.target)) {
+    const handleClickOutside = ({target}: MouseEvent) => {
+        if (ref.current && !ref.current.contains(target as Node)) {
             setIsComponentVisible(false)
         }
     }

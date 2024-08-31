@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Link as ReactLink, useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, Box, Button, Flex, Grid, GridItem, Image, Link, Menu, MenuButton, MenuItem, MenuList,  Stack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import { ButtonToggle } from '../wallet/components/ButtonToggle';
 import { useAppSelector, useAuthStore, useComponentVisible } from '../hooks';
 
 export const WalletNavbar = () => {
-    const { user, status } = useAppSelector(state => state.auth)
+    const { user } = useAppSelector(state => state.auth)
     const { programs } = useAppSelector(state => state.partnerPrograms)
     const { startLogout } = useAuthStore()
     const [currentLang, setcurrentLang] = useState('en')
