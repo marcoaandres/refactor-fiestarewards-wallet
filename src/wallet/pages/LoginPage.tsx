@@ -10,7 +10,7 @@ import logoFr from "../../assets/img/logo_FR.svg"
 import { useTranslation } from 'react-i18next'
 
 const initialValues = {
-  email: 'angelito@gmail.com',
+  email: 'marco@andres.com',
   password: '123456',
 }
 
@@ -32,7 +32,8 @@ export const LoginPage = () => {
     startLogin({email, password})
   }
 
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
+  const currentLanguaje = i18n.resolvedLanguage 
 
   const loginSchema = object({
     email: string()
@@ -61,7 +62,7 @@ export const LoginPage = () => {
                       <Flex justifyContent="center"><Img src={logoFr} width="120px" /></Flex>
                       <Box mt="56px" mb="36px">
                           <Heading as="h1" size={{base:"title-base", md:"title"}}>{ t('login.title') }</Heading>
-                          <Link as={ReactLink} to="/register">{ t('login.subtitle') }</Link>
+                          <Link as={ReactLink} to={`/${currentLanguaje}/register`}>{ t('login.subtitle') }</Link>
                       </Box>
                     <Stack spacing={4}>
                       <FormControl isInvalid={touched.email && Boolean(errors.email)}>

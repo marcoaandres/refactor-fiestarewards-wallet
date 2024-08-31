@@ -41,7 +41,7 @@ export const HomePage = () => {
         subtitle={ t('home.discoverSection.subtitle') }
         picture={Home1}
         background="primary.60"
-        child={<Button as={ReactLink} to={`/${currentLanguaje}/login`} mt="6">{ t('home.discoverSection.button') }</Button>}
+        child={<Button as={ReactLink} to={`/${currentLanguaje}/register`} mt="6">{ t('home.discoverSection.button') }</Button>}
       />
       }
       <MembershipSection/>
