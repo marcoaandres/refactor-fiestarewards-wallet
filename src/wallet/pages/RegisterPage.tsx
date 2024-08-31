@@ -35,7 +35,9 @@ export const RegisterPage = () => {
     startRegister({email, name, lastName, password})
   }
 
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
+  const currentLanguaje = i18n.resolvedLanguage 
+
   const registerSchema = object({
     name: string()
     .required(t('validateForm.isRequired'))
@@ -72,7 +74,7 @@ export const RegisterPage = () => {
                   <Flex justifyContent="center"><Img src={logoFr} width="120px" /></Flex>
                     <Box mt="56px" mb="36px">
                         <Heading as="h1" size={{base:"title-base", md:"title"}}>{ t('register.title') }</Heading>
-                        <Link as={ReactLink} to="/login">{ t('register.subtitle') }</Link>
+                        <Link as={ReactLink} to={`/${currentLanguaje}/login`}>{ t('register.subtitle') }</Link>
                     </Box>
                   <Stack spacing={4}>
                     <FormControl isInvalid={touched.name && Boolean(errors.name)}>
