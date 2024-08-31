@@ -57,7 +57,7 @@ export const MembershipDetails = () => {
                 </Flex>
               }
             >
-              <Grid templateColumns='repeat(12, 1fr)' gap="1">
+              <Grid templateColumns='repeat(12, 1fr)' gap="1" my="32px">
                 <GridItem colSpan={{ base:12, md:5, lg:5}}>
                   <Image 
                   borderRadius="8px"
