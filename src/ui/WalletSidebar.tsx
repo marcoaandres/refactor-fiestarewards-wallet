@@ -11,7 +11,7 @@ type props = {
 
 export const WalletSidebar = ({ programs }:props) => {
 
-    const { i18n } = useTranslation()
+    const { t, i18n } = useTranslation()
     const currentLanguaje = i18n.resolvedLanguage 
     const { ref, isComponentVisible: showMenu, setIsComponentVisible: setShowMenu } = useComponentVisible(false)
 
@@ -23,7 +23,7 @@ export const WalletSidebar = ({ programs }:props) => {
     <Box zIndex="docked" bgColor="primary.10" pt={{ base:"25", md: "32px" }} h={{ base:"auto", md: "100%" }} w={{base:"100%", md: "auto"}} position={{base: "fixed", md: "initial" }} ref={ref}>
         <Box visibility={{ base: 'visible', md: 'hidden' }} color="white" p="16px 24px" onClick={onToggleMenu}>
            <Box display={{base: 'block', md: 'none'}}>
-                <span>Mis membresías</span> {showMenu ? <ChevronDownIcon boxSize={6}/> : <ChevronUpIcon boxSize={6}/>}
+                <span>{ t('myMemberships.mainSection.title') }</span> {showMenu ? <ChevronDownIcon boxSize={6}/> : <ChevronUpIcon boxSize={6}/>}
             </Box>
         </Box>
         <Box display={{  base:(showMenu ? 'initial' : 'none' ), md: "initial"}}>
